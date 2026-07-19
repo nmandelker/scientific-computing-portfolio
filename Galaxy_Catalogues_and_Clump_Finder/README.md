@@ -133,9 +133,10 @@ From Mandelker et al. 2014, Figs. 3–4.*
 
 ![Bimodal dark-matter content of clumps](figures/insitu_exsitu_classification.png)
 *Step 6 visualized: the distribution of dark-matter overdensity at clump
-locations is strongly bimodal, so the in-situ/ex-situ classification threshold
-sits in a natural gap in the data rather than being imposed arbitrarily. From
-Mandelker et al. 2014, Fig. 6.*
+locations is strongly bimodal, so the in-situ/ex-situ classification
+threshold (dash-dotted line) sits in a natural gap in the data rather than
+being imposed arbitrarily — and the bimodality holds in both feedback
+variants of the simulations (blue/red). From Mandelker et al. 2017, Fig. 2.*
 
 ## Key design decisions
 

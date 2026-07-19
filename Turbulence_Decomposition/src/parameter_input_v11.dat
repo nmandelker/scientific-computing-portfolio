@@ -1,0 +1,27 @@
+ngrid_max            =  1.6E+9
+check_CIC            =  0
+move_center          =  0
+move_velocity_center =  0
+res                  =  200.0
+decomp_weight        =  0.0
+pre_smooth           =  0
+pre_smooth_dim       =  3
+pre_smooth_FWHM      =  40.0
+decomp_type          =  1
+type_2_FWHM          =  400.0
+Nvert                =  1
+type_2_mass          =  1
+type_3_FWHM          =  100.0
+use_fixed_R          =  0
+Fixed_R              =  10.0
+use_Rvir             =  1
+R_over_Rvir          =  0.15
+use_old_R            =  0
+use_fixed_H          =  1
+Fixed_H              =  1.5
+use_R                =  0
+H_over_R             =  0.2
+use_old_H            =  0
+use_temp_thresh      =  0
+temp_thresh          =  1.0E+5
+

@@ -1,0 +1,106 @@
+# Clump Evolution: An Analytic "Bathtub" Model vs. High-Cadence Tracking
+
+**An 8-line differential-equation model of how giant clumps live and die —
+validated against thousands of tracked clump histories from simulations, and
+against Hubble Space Telescope observations.**
+
+This project is the modeling layer built on top of the
+[clump finder & tracker](../Galaxy_Catalogues_and_Clump_Finder/): having
+detected and tracked thousands of clumps, the question became whether their
+life cycle could be captured by a simple, predictive analytic model. The
+result is published in
+[Dekel, Mandelker, Bournaud et al. 2022, MNRAS 511, 316](https://arxiv.org/abs/2107.13561).
+
+## The problem
+
+Whether giant clumps survive long enough to migrate to their galaxy's center
+— or are destroyed within a few tens of millions of years by their own star
+formation — was a decade-long debate, with different simulation codes giving
+different answers depending on their feedback physics. What was missing was a
+*transparent* model: one where each physical process is a term you can turn
+up or down, so you can see exactly what drives survival or disruption —
+rather than another black-box simulation.
+
+## The model
+
+A clump is treated as a "bathtub" with mass flowing in and out
+(`analysis/clump_evolution_exact.m` — the complete model is three coupled
+ordinary differential equations, eight lines of code):
+
+- **In:** gas accreted from the surrounding disc (rate parameter α)
+- **Out:** gas turned into stars (efficiency ε per free-fall time) and gas
+  expelled by stellar-feedback outflows (mass-loading factors η, μ, η_s)
+- **Meanwhile:** the clump migrates inward via dynamical friction and torques
+  (migration timescale t_mig)
+
+`clump_evolution_exact2.m` integrates the system numerically and maps the
+final clump properties over the parameter space.
+
+![Toy model evolution of clump properties](figures/toy_model_evolution.jpg)
+*Model solution for one parameter choice: clump gas mass, stellar mass, gas
+fraction, and radius as functions of time since clump formation. Each curve
+responds transparently to the accretion, star-formation, outflow, and
+migration parameters. From Dekel, Mandelker et al. 2022, Fig. 1.*
+
+## The test against simulations
+
+The model's inputs and predictions were confronted with the thin-timestep
+clump tracking produced by the
+[pipeline in this repository](../Galaxy_Catalogues_and_Clump_Finder/src/thin_timesteps/)
+— applied to two cosmological simulations (VELA V07 and V19) and, with a
+lightly adapted input stage, to isolated-galaxy RAMSES simulations run with
+and without radiation-pressure feedback (by F. Bournaud's group).
+
+The heavy lifting is in `clump_evolution.m` (~1,800 lines — an amusing
+contrast with the 8-line model it tests): it applies sample cuts to the
+tracked clump histories, aligns them by time since clump formation, and
+stacks them (mean or median, linear or log) into average evolution tracks
+with scatter. The `launch_*` drivers and their analysis functions
+(`prop_vs_time.m`, `specific_rates.m`, `clump_property_histograms.m`)
+produced the paper's simulation-vs-model figure panels. Crucially, the
+specific rates the model treats as free parameters (accretion, star
+formation, outflow) were also *measured directly* from the simulations, and
+the model was plotted with those measured values — so, up to the
+unavoidable measurement choices (interpolation, smoothing, error
+estimation), the comparison has no hand-tuned knobs.
+
+![Clump migration in simulations](figures/clump_migration.jpg)
+*Tracked clumps migrate inward: median galactocentric distance vs. time
+since formation for the clumps in the two cosmological simulations, in units
+of the disc radius and disc dynamical time. From Dekel, Mandelker et al.
+2022, Fig. 9.*
+
+## The test against observations
+
+`read_Guo2.m` ingests the observed clump catalog of Guo et al. (HST/CANDELS
+galaxies), applies selection cuts consistent with the simulation analysis,
+and compares the observed trends of clump properties with stellar age and
+galactocentric distance against the model predictions — the model matches
+the observed gradients of star-forming clumps.
+
+## Results, briefly
+
+Massive clumps (above ~10⁸ solar masses) are wounded but not killed by
+feedback: they lose gas continuously yet survive and migrate to the galaxy
+center within a few disc dynamical times, while low-mass clumps disrupt.
+The balance depends on feedback strength — the same dichotomy found
+statistically in Mandelker et al. 2017 (long-lived and migrating vs.
+short-lived and disrupted), but now sharpened from a classification into a
+quantitative evolution model.
+
+## Contents
+
+```
+├── README.md            ← this file
+├── analysis/            ← MATLAB: the analytic model (clump_evolution_exact*.m),
+│                           simulation stacking (clump_evolution.m, launch_* +
+│                           their analysis functions), catalog loading
+│                           (load_data.m, load_gen3.m, add_properties.m), and
+│                           the observational comparison (read_Guo2.m)
+└── figures/             ← publication figures (from my own papers, cited)
+```
+
+The Fortran tracking code this project consumes is published in the
+[clump finder project](../Galaxy_Catalogues_and_Clump_Finder/); the RAMSES
+input variant differed only in its reader. Catalog data files are not
+included (see the clump finder's `sample_output/` for the format).

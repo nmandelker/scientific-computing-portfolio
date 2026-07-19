@@ -32,8 +32,8 @@ in galaxies as they were ~10 billion years ago:
 | Project | What it is | Status |
 |---|---|---|
 | [Clump finder & tracker](Galaxy_Catalogues_and_Clump_Finder/) | End-to-end pipeline in Fortran 90: unsupervised object detection, multi-object tracking, and classification in 3D adaptive-resolution simulation data. Its catalogs later served as training data for neural-network studies of real Hubble Space Telescope images. | ✅ |
-| Clump evolution model | An analytic "bathtub" model of how clumps grow, migrate, and die, validated against high-cadence tracking from the pipeline above and compared to HST observations (Dekel, Mandelker et al. 2022). | 🚧 in preparation |
-| Turbulence decomposition | Helmholtz decomposition of turbulent velocity fields, showing that clumps form where compressive turbulence is anomalously strong — resolving a puzzle where classical stability theory said clumps shouldn't form (Mandelker et al. 2025). | 🚧 in preparation |
+| [Clump evolution model](Clump_Evolution_Model/) | An analytic "bathtub" model of how clumps grow, migrate, and die — 8 lines of differential equations — validated against high-cadence tracking from the pipeline above and compared to HST observations (Dekel, Mandelker et al. 2022). | ✅ |
+| [Turbulence decomposition](Turbulence_Decomposition/) | Helmholtz decomposition of turbulent velocity fields (Fortran + MKL FFTs), validated on synthetic turbulence with known ground truth — showing that clumps form where compressive turbulence is anomalously strong, resolving a puzzle where classical stability theory said clumps shouldn't form (Mandelker et al. 2025). | ✅ |
 
 ### Cold streams (design + execution of numerical experiments)
 Analytic stability theory for cold gas streams feeding early galaxies,
