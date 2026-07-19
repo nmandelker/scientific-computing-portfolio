@@ -34,9 +34,10 @@ ordinary differential equations, eight lines of code):
   (migration timescale t_mig)
 
 `fig_clump_bathtub.m` integrates the system to produce the model-solution
-curves (the figure below), and `clump_evolution_exact2.m` maps the final
-clump properties — interpolated to the moment the clump reaches the disc
-center — across the feedback-strength parameter space.
+curves (the figure below). Also included is `clump_evolution_exact2.m`, an
+exploration that did not go into the paper as-is: it maps the final clump
+properties — interpolated to the moment the clump reaches the disc center —
+across the feedback-strength parameter space.
 
 ![Toy model evolution of clump properties](figures/toy_model_evolution.jpg)
 *Model solution for one parameter choice: clump gas mass, stellar mass, gas
