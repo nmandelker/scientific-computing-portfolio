@@ -53,16 +53,17 @@ clump tracking produced by the
 lightly adapted input stage, to isolated-galaxy RAMSES simulations run with
 and without radiation-pressure feedback (by F. Bournaud's group).
 
-The heavy lifting is in `clump_evolution.m` (~1,800 lines — an amusing
-contrast with the 8-line model it tests): it applies sample cuts to the
-tracked clump histories, aligns them by time since clump formation, and
-stacks them (mean or median, linear or log) into average evolution tracks
-with scatter. The `launch_*` drivers and their analysis functions
-(`prop_vs_t_over_tdyn_rectangle.m` — which integrates the analytic model
-inside the plotting routine to overlay model curves on the stacked
-simulation tracks — plus `prop_vs_time.m`, `specific_rates.m`,
-`clump_property_histograms.m`) produced the paper's simulation-vs-model
-figure panels. Crucially, the
+The heavy lifting is in `prop_vs_t_over_tdyn_rectangle.m` (~1,400 lines —
+an amusing contrast with the 8-line model it tests, and called by the
+`launch_prop_vs_t_over_tdyn.m` driver): it applies sample cuts to the
+tracked clump histories, aligns them by time since clump formation, stacks
+them (mean or median, with scatter) into average evolution tracks, and
+integrates the analytic model inside the plotting routine to overlay the
+model curves on the stacked simulation tracks — producing the paper's
+simulation-vs-model figure panels. The other `launch_*` drivers and their
+analysis functions (`prop_vs_time.m`, `specific_rates.m`,
+`clump_property_histograms.m`) produced the supporting property and rate
+comparisons. Crucially, the
 specific rates the model treats as free parameters (accretion, star
 formation, outflow) were also *measured directly* from the simulations, and
 the model was plotted with those measured values — so, up to the
