@@ -1,0 +1,64 @@
+# Scientific Computing Portfolio — Nir Mandelker
+
+I'm a computational astrophysicist (PhD, Hebrew University; postdoctoral
+fellowships at Yale and KITP/UC Santa Barbara; most recently faculty at the
+Hebrew University of Jerusalem) with 14 years of experience building analytical 
+and numerical models, simulation pipelines, and analysis tools for terabyte-scale 
+scientific data — work behind 60+ peer-reviewed publications. This repository is a 
+curated showcase of the code behind that career, as I begin my transition 
+from academia to industry research/data-science roles. 
+
+**What this is:** research code, presented honestly. These tools were written
+to answer scientific questions under deadline, by a physicist, for himself
+and his collaborators — not as software products. What they demonstrate is
+algorithm design from scratch, performance-critical programming against real
+memory and compute limits, rigorous validation habits, and the ability to
+explain hard technical material — each project README is written for a
+technical reader with no astrophysics background.
+
+**Two kinds of work are showcased here.** In the giant-clumps projects I
+built the measurement instruments — detection, tracking, and analysis
+pipelines applied to ~100 TB of simulations run by collaborators. In the
+cold-streams project I designed and ran the numerical experiments myself,
+from analytic theory to supercomputer simulations to analysis. Different
+skills; both represented.
+
+## Projects
+
+### The giant-clumps suite
+Three connected projects studying dense, transient, star-forming structures
+in galaxies as they were ~10 billion years ago:
+
+| Project | What it is | Status |
+|---|---|---|
+| [Clump finder & tracker](Galaxy_Catalogues_and_Clump_Finder/) | End-to-end pipeline in Fortran 90: unsupervised object detection, multi-object tracking, and classification in 3D adaptive-resolution simulation data. Its catalogs later served as training data for neural-network studies of real Hubble Space Telescope images. | ✅ |
+| Clump evolution model | An analytic "bathtub" model of how clumps grow, migrate, and die, validated against high-cadence tracking from the pipeline above and compared to HST observations (Dekel, Mandelker et al. 2022). | 🚧 in preparation |
+| Turbulence decomposition | Helmholtz decomposition of turbulent velocity fields, showing that clumps form where compressive turbulence is anomalously strong — resolving a puzzle where classical stability theory said clumps shouldn't form (Mandelker et al. 2025). | 🚧 in preparation |
+
+### Cold streams (design + execution of numerical experiments)
+Analytic stability theory for cold gas streams feeding early galaxies,
+tested with idealized high-resolution simulations I designed and ran with
+the RAMSES code — adding one physical ingredient at a time (gravity,
+radiative cooling, magnetic fields) and identifying, at each step, the
+dimensionless number that determines whether the new physics changes the
+answer. Includes a forward model of an observable signal (Lyman-alpha
+emission) later applied by independent observational teams, including in
+*Science*. — 🚧 in preparation
+
+### AREPO / moving-mesh projects (Python)
+Analysis pipelines for a different class of simulations, plus
+adaptive-refinement techniques achieving ~100× effective resolution gain for
+~5× cost in targeted regions, developed in collaboration with the code's
+author and since adopted by multiple simulation groups. — 🚧 in preparation
+
+## Languages and tools
+
+Fortran 90 (performance-critical pipelines), MATLAB and Python/Matplotlib
+(analysis and visualization), MPI-era HPC cluster computing, Intel MKL,
+RAMSES / ART / AREPO simulation codes.
+
+## More
+
+- Academic site: [nirmandelker.com](https://nirmandelker.com) — research
+  overview, publications, movies
+- Publications: [Google Scholar](https://scholar.google.com/citations?user=iOHVGEoAAAAJ&hl=en)

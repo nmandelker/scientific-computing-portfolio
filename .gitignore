@@ -1,0 +1,7 @@
+# macOS folder metadata
+.DS_Store
+
+# Claude working files (project instructions/config, not for publication)
+Claude.md
+CLAUDE.md
+.claude/
