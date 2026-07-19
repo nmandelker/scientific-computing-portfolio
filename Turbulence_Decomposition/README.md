@@ -54,11 +54,12 @@ sensitivity of every result to these definitions could be, and was, tested.
 ## Validation with known ground truth
 
 The part of this project I'd highlight first:
-`src/synthetic_box_tests/krumholz_turbulence_test.f90` **generates synthetic
+`src/synthetic_box_tests/turbulence_test.f90` **generates synthetic
 turbulent boxes where the right answer is known in advance** — a random
 velocity field with a prescribed power-spectrum slope and, critically, a
-*prescribed solenoidal-to-compressive ratio* (following the prescription of
-M. Krumholz). It can also inject a disc-like rotation profile on top. The
+*prescribed solenoidal-to-compressive ratio* (built out from seed code
+shared by a colleague, acknowledged in the paper). It can also inject a
+disc-like rotation profile on top. The
 decomposition pipeline is then run on these boxes
 (`local_decomp_test.f90`) to verify that it recovers the injected mode
 ratio, and that ordered rotation does not leak into the measured turbulence.
