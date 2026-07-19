@@ -96,8 +96,10 @@ galaxy simulation. From Mandelker et al. 2025, Fig. 4.*
 
 ![Proto-clump formation sequence](figures/protoclump_Q_sequence.png)
 *The original 2016 evidence: time sequence of a clump forming (dashed
-circles) in a region where the stability map (right column) says Q > 1.
-From Inoue et al. 2016, Fig. 9.*
+circles) in a region where the stability map (right column) says Q > 1 —
+this is the same clump-formation event shown through the
+compressive-turbulence lens in the maps above, closing the loop between
+the puzzle and its resolution. From Inoue et al. 2016, Fig. 10.*
 
 Downstream MATLAB post-processing of the decomposition outputs is in
 `analysis/` (`sol_over_comp.m` — the compressive-to-solenoidal ratio
