@@ -33,8 +33,10 @@ ordinary differential equations, eight lines of code):
 - **Meanwhile:** the clump migrates inward via dynamical friction and torques
   (migration timescale t_mig)
 
-`clump_evolution_exact2.m` integrates the system numerically and maps the
-final clump properties over the parameter space.
+`fig_clump_bathtub.m` integrates the system to produce the model-solution
+curves (the figure below), and `clump_evolution_exact2.m` maps the final
+clump properties — interpolated to the moment the clump reaches the disc
+center — across the feedback-strength parameter space.
 
 ![Toy model evolution of clump properties](figures/toy_model_evolution.jpg)
 *Model solution for one parameter choice: clump gas mass, stellar mass, gas
@@ -56,8 +58,11 @@ contrast with the 8-line model it tests): it applies sample cuts to the
 tracked clump histories, aligns them by time since clump formation, and
 stacks them (mean or median, linear or log) into average evolution tracks
 with scatter. The `launch_*` drivers and their analysis functions
-(`prop_vs_time.m`, `specific_rates.m`, `clump_property_histograms.m`)
-produced the paper's simulation-vs-model figure panels. Crucially, the
+(`prop_vs_t_over_tdyn_rectangle.m` — which integrates the analytic model
+inside the plotting routine to overlay model curves on the stacked
+simulation tracks — plus `prop_vs_time.m`, `specific_rates.m`,
+`clump_property_histograms.m`) produced the paper's simulation-vs-model
+figure panels. Crucially, the
 specific rates the model treats as free parameters (accretion, star
 formation, outflow) were also *measured directly* from the simulations, and
 the model was plotted with those measured values — so, up to the
