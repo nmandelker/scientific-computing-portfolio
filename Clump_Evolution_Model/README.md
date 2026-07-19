@@ -96,6 +96,15 @@ and compares the observed trends of clump properties with stellar age and
 galactocentric distance against the model predictions — the model matches
 the observed gradients of star-forming clumps.
 
+![Model vs observed HST clumps](figures/model_vs_observations.jpg)
+*The observational test: each dot is an observed clump from the HST/CANDELS
+catalog of Guo et al. Left column: star-formation time, clump stellar mass,
+and SFR against clump stellar age, with the analytic model in cyan (its
+parameters listed in the top panel). Right column: the same properties
+against galactocentric distance, with the median trends of the simulated
+clumps (V07, V19) overlaid on the observed medians. From Dekel, Mandelker
+et al. 2022, Fig. 10.*
+
 ## Results, briefly
 
 Massive clumps (above ~10⁸ solar masses) are wounded but not killed by
