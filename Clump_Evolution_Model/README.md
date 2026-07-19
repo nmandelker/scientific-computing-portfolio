@@ -71,6 +71,17 @@ the model was plotted with those measured values — so, up to the
 unavoidable measurement choices (interpolation, smoothing, error
 estimation), the comparison has no hand-tuned knobs.
 
+![Simulation vs model for the cosmological galaxy V07](figures/sim_vs_model_V07.jpg)
+*The central comparison, for the cosmological galaxy V07 (37 tracked
+clumps). Top four panels: the model's rate parameters — accretion α,
+star-formation efficiency ε_d, and the gas and stellar outflow
+mass-loadings η, η_s — measured directly from the stacked simulation
+histories (black, with scatter); the red lines are the constant values
+adopted by the model. Bottom four panels: the resulting evolution of gas
+mass, stellar mass, SFR, and star-formation time — simulation stacks in
+black, the analytic model in red. From Dekel, Mandelker et al. 2022,
+Fig. 6.*
+
 ![Clump migration in simulations](figures/clump_migration.jpg)
 *Tracked clumps migrate inward: median galactocentric distance vs. time
 since formation for the clumps in the two cosmological simulations, in units
