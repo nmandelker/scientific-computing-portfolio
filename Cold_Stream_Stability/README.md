@@ -71,7 +71,7 @@ and the density ratio (contrast) between the stream and the background δ.
 From Mandelker et al. 2016, Fig. 1.*
 
 The paper's central result is that in the supersonic regime, where
-classical surface modes are stable and one might conclude streams survive. 
+classical surface modes are stable and one might conclude streams survive,
 a family of slower-growing **body modes** (waves reverberating inside the
 stream itself) takes over the instability:
 

@@ -4,8 +4,9 @@ The analytic engine of the cold-streams program, presented as-is.
 
 | File | Role |
 |---|---|
-| `nir_test_adiabatic.nb` | Mathematica: numerically solves the linear KHI dispersion relations (sheet, slab, cylinder geometries), exporting solution grids as CSV (see `sample_output_ImP_00.csv`). |
-| `compressible_sheet_growth_times.m`, `compressible_slab_growth_times.m` | Growth-time analyses for the single-interface and slab cases. |
+| `nir_test_adiabatic.nb` | Mathematica: numerically solves the linear KHI dispersion relation for the planar-slab geometry — the hardest of the three cases — exporting solution grids as CSV (see `sample_output_ImP_00.csv`). (The single-interface sheet reduces to a quartic polynomial solved directly in MATLAB; the cylinder was solved in a separate notebook, not included here.) |
+| `compressible_sheet_growth_times.m` | Solves and analyzes the sheet (single-interface) dispersion relation directly — the quartic case (M16, Fig. 1). |
+| `compressible_slab_growth_times.m` | Growth-time analysis of the slab solutions from the notebook. |
 | `KHI_phase_diagrams_analytic.m` | Stability phase diagrams over the (M_b, δ) parameter space (M16, Fig. 11). |
 | `marginally_stable_cylinder.m` | Marginal-stability boundaries for the cylindrical stream. |
 | `azimuthal_modes.m` | Structure of the azimuthal (m = 0, 1, 2, ...) modes of the cylinder (M16, Fig. 6). |
