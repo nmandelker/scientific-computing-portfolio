@@ -26,7 +26,6 @@ measurement scripts:
 | `sample_submit.sh` | Example cluster submission script. |
 | `Eigen_growth.m` | Measures perturbation growth rates in the simulation outputs for comparison with theory (M16, Fig. 8). |
 | `convergence.m`, `plot_convergence_resolution.m` | Resolution-convergence study of the measured growth rates. |
-| `read_ramses_2d.m` | Reader for the raw 2D RAMSES outputs. |
 
 The patch files extend the public RAMSES code (Teyssier 2002), which is not
 included here.
