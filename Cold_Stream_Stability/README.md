@@ -1,4 +1,4 @@
-# Cold Stream Stability: A Long Term Research Program, One Physical Ingredient at a Time
+# Cold Stream Stability: One Physical Ingredient at a Time
 
 **Analytic instability theory + numerical experiments I designed and ran
 myself — an eleven-work research program (and counting) built by adding 
