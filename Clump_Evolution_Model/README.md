@@ -1,6 +1,6 @@
 # Clump Evolution: An Analytic "Bathtub" Model vs. High-Cadence Tracking
 
-**An 8-line differential-equation model of how giant clumps live and die —
+**An 8-line differential-equation model of how giant clumps live and die,
 validated against hundreds of tracked clump histories from simulations, both 
 cosmological and idealized, and against Hubble Space Telescope observations.**
 
@@ -49,12 +49,12 @@ migration parameters. From Dekel, Mandelker et al. 2022, Fig. 1.*
 
 ## The test against simulations
 
-The model's inputs and predictions were confronted with the thin-timestep
-clump tracking produced by the
+The model's inputs and predictions were confronted with high time-resolution 
+(the "thin-timesteps") clump tracking produced by the
 [pipeline in this repository](../Galaxy_Catalogues_and_Clump_Finder/src/thin_timesteps/). 
-This was applied to two cosmological simulations (VELA V07 and V19) and, with 
-a lightly adapted input stage, to isolated-galaxy RAMSES simulations run with
-and without radiation-pressure feedback (by F. Bournaud's group).
+This was applied to two cosmological simulations (VELA 07 and 19, aka V07 and V19) 
+and, with a lightly adapted input stage, to isolated-galaxy RAMSES simulations run 
+with and without radiation-pressure feedback (by F. Bournaud's group).
 
 The heavy lifting is in `prop_vs_t_over_tdyn_rectangle.m` (~1,400 lines —
 an amusing contrast with the 8-line model it tests, and called by the
@@ -79,7 +79,7 @@ star-formation efficiency ε_d, and the gas and stellar outflow
 mass-loadings η, η_s — measured directly from the stacked simulation
 histories (black, with scatter); the red lines are the constant values
 adopted by the model. Bottom four panels: the resulting evolution of gas
-mass, stellar mass, SFR, and star-formation time — simulation stacks in
+mass, stellar mass, SFR, and star-formation time, simulation stacks in
 black, the analytic model in red. From Dekel, Mandelker et al. 2022,
 Fig. 6.*
 

@@ -128,4 +128,4 @@ the map-based figures).
 └── figures/                             ← publication figures (my papers, cited)
 ```
 
-Simulation outputs (~10⁴ binary grid files per galaxy) are not included.
+Simulation outputs (~10^3 binary grid files per galaxy) are not included.
