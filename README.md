@@ -4,8 +4,8 @@ I'm a computational astrophysicist (PhD, Hebrew University; postdoctoral
 fellowships at Yale and KITP/UC Santa Barbara; most recently faculty at the
 Hebrew University of Jerusalem) with 14 years of experience building analytical 
 and numerical models, simulation pipelines, and analysis tools for terabyte-scale 
-scientific data — work behind 60+ peer-reviewed publications. This repository is a 
-curated showcase of the code behind that career, as I begin my transition 
+scientific data — work that has led to 60+ peer-reviewed publications. This repository 
+is a curated showcase of the code behind that career, as I begin my transition 
 from academia to industry research/data-science roles. 
 
 **What this is:** research code, presented honestly. These tools were written
@@ -21,7 +21,10 @@ built the measurement instruments — detection, tracking, and analysis
 pipelines applied to ~100 TB of simulations run by collaborators. In the
 cold-streams project I designed and ran the numerical experiments myself,
 from analytic theory to supercomputer simulations to analysis. Different
-skills; both represented.
+skills; both represented. In the cosmic web refinement project, I combined 
+both skills, designing and running, together with my collaborators, cosmological 
+simulations with novel refinement methods and building analysis pipelines 
+from scratch to deal with ~10s of TB of data. 
 
 ## Projects
 
