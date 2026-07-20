@@ -57,8 +57,8 @@ author and since adopted by multiple simulation groups. — 🚧 in preparation
 ## Languages and tools
 
 Fortran 90 (performance-critical pipelines), MATLAB and Python/Matplotlib
-(analysis and visualization), MPI-era HPC cluster computing, Intel MKL,
-RAMSES / ART / AREPO simulation codes.
+(analysis and visualization), Mathematica (symbolic/analytic work), MPI-era
+HPC cluster computing, Intel MKL, RAMSES / ART / AREPO simulation codes.
 
 ## More
 
