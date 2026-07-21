@@ -23,7 +23,7 @@ in a hot wind) with radiative cooling:
 | File | Role |
 |---|---|
 | `condinit.f90` | Initial conditions: the cold cylindrical stream, hot background, shear velocity, and the perturbation (single-variable or eigenmode). |
-| `cooling_module.f90`, `cooling_fine.f90` | The radiative cooling and UV-heating routines. The stream and background are given different metallicities (`met_s`, `met_b` — passive scalars set in `condinit.f90`), with UV-background heating (Haardt-Madau) and self-shielding as runtime options. |
+| `cooling_module.f90`, `cooling_fine.f90` | RAMSES's stock radiative-cooling and UV-heating routines, only lightly modified — some technical changes and control over the redshift of the UV background, appropriate for these idealized (non-cosmological) box simulations. Metallicity-dependent cooling with different metallicities per zone was already a standard capability; the stream and background are simply assigned different metallicities (`met_s`, `met_b`) as passive scalars in `condinit.f90`. Included for completeness of the patch. |
 | `hydro_parameters.f90`, `read_hydro_params.f90`, `read_params.f90` | Parameter definitions and namelist reading for the added stream/cooling parameters. |
 | `adaptive_loop.f90`, `init_time.f90` | Modifications to the main time loop and initialization for the idealized-box setup and custom outputs. |
 | `kh_example.nml` | A representative namelist. Many runs span a grid of Mach number, density contrast, stream density, and metallicity, so no single namelist captures the whole suite — this is one example; individual parameters (e.g. the cooling temperature floor) vary per run. |
