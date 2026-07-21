@@ -41,30 +41,34 @@ cannot be read off from linear theory.
 ## The method
 
 Rather than simulating the fully coupled system at once, the program builds
-from the bottom-up: start from pure hydrodynamics, then admit one new physical 
-ingredient at a time. At each step, we identify the *dimensionless number* that
-determines whether the new ingredient changes the leading-order answer:
+from the bottom up: start from pure hydrodynamics, then admit one new physical
+ingredient at a time. Each *ingredient* is characterized by the *dimensionless
+number* that determines whether it changes the leading-order answer — the
+organizing principle of the whole program. (The distinction matters: a
+dimensionless number classifies new physics, not a new evolutionary stage. The
+nonlinear evolution of the hydrodynamic case, for instance, introduces no new
+number; its outcome is diagnosed by the ratio of the stream's disruption time
+to its virial-crossing time.)
 
-| Stage | Physics added | Governing number | Key works |
-|---|---|---|---|
-| 1 | Pure hydro, linear theory (2D sheet/slab + 3D cylinder) | Mach number M_b; density contrast δ | [Mandelker et al. 2016](https://arxiv.org/abs/1606.06289) |
-| 2 | Nonlinear evolution (2D, then 3D) | stream radius / shear-layer width | [Padnos, Mandelker et al. 2018](https://arxiv.org/abs/1803.09105); [Mandelker et al. 2019](https://arxiv.org/abs/1806.05677) |
-| 3 | Self-gravity | KH disruption time / free-fall time | [Aung, Mandelker et al. 2019](https://arxiv.org/abs/1903.09666); cosmological application: [Mandelker et al. 2018](https://arxiv.org/abs/1711.09108) |
-| 4 | Radiative cooling | KH disruption time / mixing-layer cooling time | [Mandelker et al. 2020a](https://arxiv.org/abs/1910.05344) |
-| 5 | Cosmological setting + observable prediction | (forward model: Lyman-α emission vs. halo mass & redshift) | [Mandelker et al. 2020b](https://arxiv.org/abs/2003.01724); verified & extended in [Aung, Mandelker et al. 2024](https://arxiv.org/abs/2403.00912) |
-| 6 | Thermal shattering; stream–halo pressure contrast | cooling time / sound-crossing time | [Yao, Mandelker et al. 2025](https://arxiv.org/abs/2410.12914); [Yao, Mandelker & Oh 2026](https://arxiv.org/abs/2607.14090) |
-| 7 | Magnetic fields | plasma β | as yet unpublished (complete; presented at conferences) |
+| Physical ingredient | Governing dimensionless number | Works |
+|---|---|---|
+| Hydrodynamics | Mach number M_b, density contrast δ | [Mandelker et al. 2016](https://arxiv.org/abs/1606.06289) (linear); [Padnos, Mandelker et al. 2018](https://arxiv.org/abs/1803.09105) (2D nonlinear); [Mandelker et al. 2019](https://arxiv.org/abs/1806.05677) (3D nonlinear) |
+| Cosmological setting | stream radius / halo virial radius (set by halo mass & redshift) | [Mandelker et al. 2018](https://arxiv.org/abs/1711.09108); [Mandelker et al. 2020b](https://arxiv.org/abs/2003.01724); [Aung, Mandelker et al. 2024](https://arxiv.org/abs/2403.00912) |
+| Self-gravity | disruption time / free-fall time | [Aung, Mandelker et al. 2019](https://arxiv.org/abs/1903.09666); [Mandelker et al. 2018](https://arxiv.org/abs/1711.09108) |
+| Radiative cooling | disruption time / mixing-layer cooling time | [Mandelker et al. 2020a](https://arxiv.org/abs/1910.05344); [Mandelker et al. 2020b](https://arxiv.org/abs/2003.01724); [Aung, Mandelker et al. 2024](https://arxiv.org/abs/2403.00912) |
+| Thermal shattering & stream–halo pressure contrast | cooling time / sound-crossing time | [Yao, Mandelker et al. 2025](https://arxiv.org/abs/2410.12914); [Yao, Mandelker & Oh 2026](https://arxiv.org/abs/2607.14090) |
+| Magnetic fields | plasma β | as yet unpublished (complete; presented at conferences); precursor [Berlok & Pfrommer 2019](https://doi.org/10.1093/mnras/stz2347) |
 
-This repository releases the program in stages. **Stage 1 (linear theory +
-its simulation verification) is included below.** The cooling stage, where I 
-introduce the theory turbulent radiative mixing layers (TRMLs), is the pivotal 
-one. Its full vertical slice of RAMSES patches, analysis pipeline, and plotting 
-is currently in preparation, as are conference figures from the unpublished 
-magnetic-fields stage.
+Two pieces of the program are shown here in full, chosen because their code is
+the most *distinct* (the hydrodynamic and cooling stages share the same
+analysis machinery across most of the intermediate papers): the **linear
+theory with its simulation verification**, and the **radiative-cooling
+pipeline** end to end. The self-gravity and magnetic-field ingredients are
+shown through their key results rather than their code.
 
 ---
 
-## Stage 1: Linear theory, and making the simulations prove it
+## Hydrodynamics: linear theory, and making the simulations prove it
 
 `linear_theory/` contains the analytic engine of Mandelker et al. 2016
 (MNRAS 463, 3921): a Mathematica notebook (`nir_test_adiabatic.nb`) that
@@ -135,7 +139,7 @@ et al. 2016, Fig. 11.*
 
 ---
 
-## Stage 4: Radiative cooling — the full simulation-to-analysis pipeline
+## Radiative cooling: the full simulation-to-analysis pipeline
 
 The pivotal stage of the program, and the one shown here end to end. Adding
 radiative cooling changes the answer qualitatively: instead of being eroded
@@ -191,16 +195,39 @@ An observational follow-up applied this machinery to interpret real
 absorption sightlines through the circumgalactic medium (Hafen et al. 2024,
 MNRAS 528, 39).
 
+## The other ingredients, in brief
+
+The self-gravity and magnetic-field ingredients are shown here through their
+key results rather than through code (the magnetic-field row of the panel at
+the top of this page is the qualitative summary).
+
+### Self-gravity
+
+When the stream's self-gravity is strong enough — when the disruption time
+exceeds the free-fall time — the stream can fragment under its own weight
+before the instability destroys it. Applied to a real cosmological simulation,
+this predicts star formation *inside the streams*, out in the halo, far from
+the galaxy: a candidate formation channel for metal-poor globular clusters
+([Mandelker et al. 2018](https://arxiv.org/abs/1711.09108)).
+
+![Streams fragmenting into star-forming clumps in a cosmological simulation](figures/self_gravity_gc_formation.png)
+*Simulated galaxy VELA19 at redshift z = 6.07, ~13 billion years ago. Columns:
+dark-matter, gas, and young-star (< 100 Myr) surface density; top row a wide
+view (solid circle = halo virial radius), bottom row a zoom. Cold streams feed
+the halo along the cosmic web; the circles mark dense, star-forming clumps that
+have formed within the streams themselves, outside the central galaxy — the
+predicted globular-cluster birthplaces. From Mandelker et al. 2018.*
+
 ## Contents
 
 ```
 ├── README.md
-├── linear_theory/                   ← Stage 1 (M16): dispersion relations
+├── linear_theory/                   ← Hydrodynamics (M16): dispersion relations
 │   ├── nir_test_adiabatic.nb        ← Mathematica slab solver
 │   ├── *.m                          ← MATLAB analysis of the solutions
 │   ├── sample_output_ImP_00.csv     ← example solver output
 │   └── ramses_verification/         ← RAMSES patch + growth-measurement scripts
-├── cooling_simulations/             ← Stage 4 (M20a): the full vertical slice
+├── cooling_simulations/             ← Radiative cooling (M20a): the full vertical slice
 │   ├── ramses_patch/                ← RAMSES patch with modified cooling + namelist
 │   ├── conversion/                  ← raw RAMSES → compact AMR-leaf format
 │   ├── analysis/                    ← Fortran stream-property measurement
@@ -208,6 +235,6 @@ MNRAS 528, 39).
 └── figures/                         ← publication figures (my papers, cited)
 ```
 
-The remaining stages (nonlinear evolution, self-gravity, the Lyman-α forward
-model, and conference material from the unpublished magnetic-fields study)
-will be added incrementally.
+Additional material (the nonlinear-hydrodynamics simulations, the Lyman-α
+forward model, and further conference figures from the unpublished
+magnetic-fields study) may be added incrementally.
