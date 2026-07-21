@@ -275,8 +275,10 @@ galaxy. From Mandelker et al. 2020b.*
 **Validated against real data.** The model was carried through to direct
 comparison with observations in
 [Aung, Mandelker et al. 2024](https://arxiv.org/abs/2403.00912): the
-stream-entrainment physics feeds a simple "bathtub" model of a galaxy's gas
-budget, which predicts how fast galaxies form stars over cosmic time.
+stream-entrainment physics feeds the analytic gas-regulator ("bathtub")
+model of [Dekel & Mandelker 2014](https://academic.oup.com/mnras/article/444/3/2071/1049825)
+(MNRAS 444, 2071) — a framework I co-developed — which predicts how fast
+galaxies form stars over cosmic time.
 
 ![Predicted star-formation history vs observed data](figures/model_vs_obs_sfr_1e12.png)
 *The model against measurements: specific star-formation rate versus redshift
@@ -286,6 +288,11 @@ assumptions about the stream); the points are observational determinations
 built up from idealized stream simulations, reproduces the observed
 star-formation history with no fitting to these data. From Aung, Mandelker
 et al. 2024.*
+
+This is the same class of analytic gas-regulator model applied to giant
+clumps in the [clump-evolution project](../Clump_Evolution_Model/) elsewhere
+in this repository — one framework, two very different problems, each tested
+against data.
 
 The Lyman-α side of the forward model was likewise used to interpret actual
 detections: Daddi et al. 2022b applied it to an observed cold stream, and it
