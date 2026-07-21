@@ -133,21 +133,81 @@ dimensionless numbers). This "can the stream survive?" figure recurs throughout
 the paper series, updated as each new physical ingredient is added. From Mandelker 
 et al. 2016, Fig. 11.*
 
+---
+
+## Stage 4: Radiative cooling — the full simulation-to-analysis pipeline
+
+The pivotal stage of the program, and the one shown here end to end. Adding
+radiative cooling changes the answer qualitatively: instead of being eroded
+by the instability, a cold stream can *grow*, entraining and cooling the hot
+gas it mixes with. This is published in
+[Mandelker et al. 2020a](https://arxiv.org/abs/1910.05344) (MNRAS 494, 2641).
+
+The governing dimensionless number for this stage is the ratio of the
+**cooling time in the turbulent mixing layer to the shear (disruption) time**,
+`t_cool,mix / t_shear`. When mixed gas cools faster than the instability can
+disrupt the stream, hot material condenses onto the stream rather than
+tearing it apart.
+
+![Critical stream radius for entrainment vs disruption](figures/cooling_critical_radius.png)
+*The stage's dimensionless number as a survival criterion: the critical
+stream radius at which `t_cool,mix = t_shear`, as a function of stream density
+and density contrast. Streams larger than this (most real streams feeding
+massive halos) are in the entrainment-dominated, surviving regime. This is
+the cooling-stage version of the recurring "can the stream survive?" figure —
+and it is produced by `cooling_simulations/matlab/Rs_crit_panels.m`. From
+Mandelker et al. 2020a, Fig. 1.*
+
+![Stream evolution without vs with cooling](figures/cooling_density_evolution.png)
+*The result, visually: gas density in an idealized stream simulation over
+eight sound-crossing times, without radiative cooling (left) and with it
+(right). Without cooling the stream diffuses into a broad, low-density wake;
+with cooling it stays dense and coherent, actually gaining cold mass. From
+Mandelker et al. 2020a, Fig. 2.*
+
+![Cold mass growth via entrainment](figures/cooling_mass_growth.png)
+*The quantitative headline: cold-gas mass versus time. Without cooling
+(dashed) the cold stream mass declines; with cooling (solid) it *grows*, as
+hot gas is entrained and cooled — the turbulent radiative mixing layer (TRML)
+mechanism. From Mandelker et al. 2020a, Fig. 5.*
+
+![Turbulence in the mixing zone](figures/cooling_mixing_turbulence.png)
+*The mixing-layer turbulence that drives entrainment, measured from the
+simulations — one of the many diagnostics computed by the analysis pipeline
+in `cooling_simulations/analysis/`. From Mandelker et al. 2020a, Fig. 8.*
+
+**The vertical slice.** `cooling_simulations/` contains the full pipeline
+behind these results: the RAMSES patch that sets up and runs the simulations
+(with the modified cooling), the Fortran tools that convert raw outputs to a
+compact analysis format, the Fortran analysis codes that measure stream
+properties, and the MATLAB layer for the analytic estimates and final plots.
+See its [README](cooling_simulations/) for the walkthrough.
+
+The linear theory of KHI *with* cooling (a much larger parameter space —
+cooling-curve slopes and densities in each medium) was also worked out in
+Mathematica but did not make the paper; it is not included here.
+
+An observational follow-up applied this machinery to interpret real
+absorption sightlines through the circumgalactic medium (Hafen et al. 2024,
+MNRAS 528, 39).
+
 ## Contents
 
 ```
 ├── README.md
-├── linear_theory/
-│   ├── nir_test_adiabatic.nb        ← Mathematica dispersion-relation solver
+├── linear_theory/                   ← Stage 1 (M16): dispersion relations
+│   ├── nir_test_adiabatic.nb        ← Mathematica slab solver
 │   ├── *.m                          ← MATLAB analysis of the solutions
 │   ├── sample_output_ImP_00.csv     ← example solver output
-│   └── ramses_verification/         ← RAMSES patch (ICs, parameters, both
-│                                       namelists) + growth-measurement and
-│                                       convergence MATLAB scripts
+│   └── ramses_verification/         ← RAMSES patch + growth-measurement scripts
+├── cooling_simulations/             ← Stage 4 (M20a): the full vertical slice
+│   ├── ramses_patch/                ← RAMSES patch with modified cooling + namelist
+│   ├── conversion/                  ← raw RAMSES → compact AMR-leaf format
+│   ├── analysis/                    ← Fortran stream-property measurement
+│   └── matlab/                      ← analytic estimates + plotting
 └── figures/                         ← publication figures (my papers, cited)
 ```
 
-Stages 2–7 (nonlinear evolution, self-gravity, cooling/TRML with its full
-simulation-and-analysis vertical slice, the Lyman-α forward model, and
-conference material from the unpublished magnetic-fields study) will be
-added incrementally.
+The remaining stages (nonlinear evolution, self-gravity, the Lyman-α forward
+model, and conference material from the unpublished magnetic-fields study)
+will be added incrementally.
