@@ -5,6 +5,16 @@ myself — an eleven-work research program (and counting) built by adding
 one piece of physics at a time, with a governing dimensionless number 
 identified at every step.**
 
+![The build-up method: gravity, cooling, and magnetic fields](figures/buildup_method_panel.png)
+*The method in one frame: gas density in idealized cold-stream simulations
+as each new physical ingredient is added and dialed up. **Top:** self-gravity
+(none → weak → strong) — strong gravity fragments the stream into clumps.
+**Middle:** radiative cooling (none → weak → strong) — cooling reshapes the
+turbulent mixing layer. **Bottom:** magnetic fields at fixed cooling (weak →
+medium → strong) — fields smooth the interface and help the stream survive.
+Each row is governed by its own dimensionless number (Sections below). The
+magnetic-field row is from work not yet published.*
+
 Unlike the giant-clumps projects in this repository, where I built the
 measurement instruments for simulations run by others, here I posed the
 questions, derived the theory, designed and ran the simulations (with the
