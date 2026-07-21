@@ -57,7 +57,7 @@ to its virial-crossing time.)
 | Self-gravity | disruption time / free-fall time | [Aung, Mandelker et al. 2019](https://arxiv.org/abs/1903.09666); [Mandelker et al. 2018](https://arxiv.org/abs/1711.09108) |
 | Radiative cooling | disruption time / mixing-layer cooling time | [Mandelker et al. 2020a](https://arxiv.org/abs/1910.05344); [Mandelker et al. 2020b](https://arxiv.org/abs/2003.01724); [Aung, Mandelker et al. 2024](https://arxiv.org/abs/2403.00912) |
 | Thermal shattering & stream–halo pressure contrast | cooling time / sound-crossing time | [Yao, Mandelker et al. 2025](https://arxiv.org/abs/2410.12914); [Yao, Mandelker & Oh 2026](https://arxiv.org/abs/2607.14090) |
-| Magnetic fields | plasma β | as yet unpublished (complete; presented at conferences); precursor [Berlok & Pfrommer 2019](https://doi.org/10.1093/mnras/stz2347) |
+| Magnetic fields | plasma β | as yet unpublished (complete; presented at conferences) |
 
 Two pieces of the program are shown here in full, chosen because their code is
 the most *distinct* (the hydrodynamic and cooling stages share the same
