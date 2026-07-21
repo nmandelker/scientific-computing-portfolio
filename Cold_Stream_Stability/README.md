@@ -272,13 +272,28 @@ all cosmologically realistic streams (solid lines) sit well above the
 disruption threshold (grey) — cold streams survive their journey to the
 galaxy. From Mandelker et al. 2020b.*
 
-**Validated against real data by independent teams.** This forward model was
-subsequently used to interpret actual observations: Daddi et al. 2022b applied
-it to a cold-stream detection, and it appears in Emonts et al. 2024 (*Science*),
-on which I am a co-author. In industry terms this is the full loop — a
-physics-based model of a hidden state, forward-modeled into a predicted
-observable, then confronted with measurements — the same operation as sensor
-forward-modeling or state estimation, in a different domain.
+**Validated against real data.** The model was carried through to direct
+comparison with observations in
+[Aung, Mandelker et al. 2024](https://arxiv.org/abs/2403.00912): the
+stream-entrainment physics feeds a simple "bathtub" model of a galaxy's gas
+budget, which predicts how fast galaxies form stars over cosmic time.
+
+![Predicted star-formation history vs observed data](figures/model_vs_obs_sfr_1e12.png)
+*The model against measurements: specific star-formation rate versus redshift
+for galaxies in 10¹² M☉ halos. Coloured lines are the model (for different
+assumptions about the stream); the points are observational determinations
+(red: Leja et al. 2022; blue: Pearson et al. 2018). The physics-based model,
+built up from idealized stream simulations, reproduces the observed
+star-formation history with no fitting to these data. From Aung, Mandelker
+et al. 2024.*
+
+The Lyman-α side of the forward model was likewise used to interpret actual
+detections: Daddi et al. 2022b applied it to an observed cold stream, and it
+appears in Emonts et al. 2024 (*Science*), on which I am a co-author. In
+industry terms this is the full loop — a physics-based model of a hidden
+state, forward-modeled into a predicted observable, then confronted with
+measurements — the same operation as sensor forward-modeling or state
+estimation, in a different domain.
 
 ![Lyman-alpha luminosity is robust to magnetic fields](figures/lya_dissipation_vs_beta.png)
 *Robustness of the prediction to added physics: the dissipation luminosity
