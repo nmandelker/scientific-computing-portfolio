@@ -218,6 +218,75 @@ the halo along the cosmic web; the circles mark dense, star-forming clumps that
 have formed within the streams themselves, outside the central galaxy — the
 predicted globular-cluster birthplaces. From Mandelker et al. 2018.*
 
+### Magnetic fields
+
+Adding magnetic fields introduces the plasma β (thermal / magnetic pressure).
+Two results stand out, both from the (as-yet-unpublished, conference-presented)
+magnetic-fields study:
+
+![Magnetic field amplification in the mixing layer](figures/mhd_field_amplification.png)
+*Field amplification: radial profiles of the mean plasma β at late times, with
+cooling (left) and without (right). Even a stream that starts essentially
+unmagnetized (β ≈ 10⁵, black) has its field amplified toward equipartition
+(β ≈ 1–10) in the cooling-driven turbulent mixing layer near the stream core.
+The amplification is far stronger when cooling is present.*
+
+![The mixing-layer entrainment theory generalizes to MHD](figures/mhd_entrainment_theory.png)
+*The method surviving a new ingredient. Left: cold-mass growth for a range of
+β. The apparent β-dependence of the entrainment rate (centre) collapses onto
+the single predicted value (right, dashed line at unity) once the mixing-layer
+cooling time is evaluated with the gas density set by **total** (thermal +
+magnetic) pressure balance rather than thermal-pressure balance alone. With
+that one physically-motivated change of variable, the same turbulent-radiative-
+mixing-layer theory derived for the pure-cooling case describes every run with
+β ≳ 10.*
+
+## From model to telescope: predicting what's observable
+
+This is the payoff of the whole program, and the piece that translates most
+directly outside astrophysics: a **physics-based forward model that turns the
+idealized-simulation results into a prediction of a real, observable signal**,
+which independent teams then tested against telescope data.
+
+The cosmological setting fixes the two base numbers (M_b, δ) from first
+principles — a stream in pressure equilibrium with a hot halo, inflowing at
+roughly the virial velocity, has δ ~ 10–100 and M_b ~ 1 — and ties them to
+halo mass and redshift. Folding in the halo potential and the cooling-driven
+dissipation from the stages above, the model
+([Mandelker et al. 2020b](https://arxiv.org/abs/2003.01724)) predicts how much
+energy each stream radiates, and at what wavelength, as it falls in. The code
+is in `cosmological_model/`.
+
+![Predicted stream velocity, mass growth, and Lyman-alpha luminosity](figures/lya_luminosity_vs_mass_z.png)
+*The forward model's output, as a function of halo mass and (colours) redshift:
+stream infall velocity (left), cold-mass growth by entrainment (centre), and
+the dissipation luminosity radiated mostly as Lyman-α (right). For massive
+halos (10¹²–10¹³ M☉) the model predicts Lyman-α luminosities of
+~10⁴²–10⁴³ erg/s — squarely in the range of observed "Lyman-α blobs." From
+Mandelker et al. 2020b.*
+
+![Which streams survive, as a function of halo mass and redshift](figures/stream_survival_vs_mass.png)
+*The survival map: the ratio of stream radius to the critical radius for
+cooling to beat disruption, versus halo mass, at three redshifts. Essentially
+all cosmologically realistic streams (solid lines) sit well above the
+disruption threshold (grey) — cold streams survive their journey to the
+galaxy. From Mandelker et al. 2020b.*
+
+**Validated against real data by independent teams.** This forward model was
+subsequently used to interpret actual observations: Daddi et al. 2022b applied
+it to a cold-stream detection, and it appears in Emonts et al. 2024 (*Science*),
+on which I am a co-author. In industry terms this is the full loop — a
+physics-based model of a hidden state, forward-modeled into a predicted
+observable, then confronted with measurements — the same operation as sensor
+forward-modeling or state estimation, in a different domain.
+
+![Lyman-alpha luminosity is robust to magnetic fields](figures/lya_dissipation_vs_beta.png)
+*Robustness of the prediction to added physics: the dissipation luminosity
+over time for a range of plasma β. For realistically weak fields (β ≳ 1000)
+the luminosity tracks the pure-hydrodynamic case (green/black) — so the
+observable prediction is largely unchanged by magnetic fields, and only very
+strong fields would suppress it. From the unpublished magnetic-fields study.*
+
 ## Contents
 
 ```
@@ -232,6 +301,8 @@ predicted globular-cluster birthplaces. From Mandelker et al. 2018.*
 │   ├── conversion/                  ← raw RAMSES → compact AMR-leaf format
 │   ├── analysis/                    ← Fortran stream-property measurement
 │   └── matlab/                      ← analytic estimates + plotting
+├── cosmological_model/              ← Forward model (M20b): stream properties &
+│                                      Lyman-α emission vs halo mass and redshift
 └── figures/                         ← publication figures (my papers, cited)
 ```
 
