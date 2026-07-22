@@ -13,8 +13,9 @@ the paper's figures, not the complete set.
 | `compressible_sheet_growth_times.m` | Solves and analyzes the sheet (single-interface) dispersion relation directly. (M16, Fig. 1). |
 | `compressible_slab_growth_times.m` | Growth-time analysis of the slab solutions from the notebook. |
 | `KHI_phase_diagrams_analytic.m` | Stability phase diagrams over the (M_b, δ) parameter space (M16, Fig. 11). |
-| `azimuthal_modes.m` | Structure of the azimuthal modes (m = 0, 1, 2, ...) of the cylinder — the cleanest cylinder example, and a paper figure (M16, Fig. 6). |
-| `P1_cyl.m`, `cyl_mode_structure.m` | Pressure-perturbation mode structure and growth rates for the cylindrical stream — the cylinder analogue of the slab analysis (paper §2.4). |
+| `azimuthal_modes.m` | Structure of the first 6 azimuthal modes of the cylinder (m = 0, 1, 2, ...) (M16, Fig. 6). |
+| `cyl_mode_structure.m` | Body mode growth rates for the cylindrical stream (M16, Fig. 7). |
+| `P1_cyl.m` | Pressure-perturbation mode structure for body-modes in the cylindrical stream (analogous to M16, Fig. 5). |
 
 ## `verification/`
 
