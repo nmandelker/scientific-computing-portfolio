@@ -25,7 +25,11 @@ measurement scripts:
 | `kh_production.nml` | Configuration for the paper's production runs with a single-variable perturbation. |
 | `sample_submit.sh` | Example cluster submission script. |
 | `Eigen_growth.m` | Measures perturbation growth rates in the simulation outputs for comparison with theory (M16, Fig. 8). |
-| `convergence.m`, `plot_convergence_resolution.m` | Resolution-convergence study of the measured growth rates. |
+
+The measured growth rates were verified to converge with resolution (stable
+across `levelmax` 12–14); those convergence tests are not shown in the paper,
+whose rigor rested on the exact analytic dispersion relation that the
+simulations were checked against.
 
 The patch files extend the public RAMSES code (Teyssier 2002), which is not
 included here.
