@@ -282,12 +282,13 @@ star-formation history with no fitting to these data. From Aung, Mandelker
 et al. 2024.*
 
 The Lyman-α side of the forward model was likewise used to interpret actual
-detections: Daddi et al. 2021 and 2022b applied it to observations of cold 
-streams and of galactic specific SFRs across redshift. It was also used in 
-Emonts et al. 2024 (*Science*), on which I am a co-author, to interpret direct 
-observations of cold streams with ALMA, and in several papers (Wang et al 2021; 
-Arrigoni Battaia et al 2022; Johnson et al 2022) to interpret MUSE observations 
-of cold streams and CGM gas. In industry terms this is the full loop: a 
+detections. Independent teams applied it to real data with no involvement from 
+me — Daddi et al. 2021/2022b (cold streams and galactic specific-SFR trends 
+across redshift), and Wang et al. 2021, Arrigoni Battaia et al. 2022, and 
+Johnson et al. 2022 (MUSE observations of cold streams and circumgalactic gas). 
+And it was used to interpret direct ALMA observations of a cold stream in 
+Emonts et al. 2024 — a *Science* paper on which I am a co-author. In industry 
+terms this is the full loop: a 
 physics-based model of a hidden state, forward-modeled into a predicted observable, 
 then confronted with measurements. This is the same operation as sensor forward-modeling 
 or state estimation, in a different domain. 
