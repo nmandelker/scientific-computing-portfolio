@@ -6,14 +6,14 @@ one piece of physics at a time, with a governing dimensionless number
 identified at every step.**
 
 ![The build-up method: gravity, cooling, and magnetic fields](figures/buildup_method_panel.png)
-*The method in one frame: gas density in idealized cold-stream simulations
+*The method in one frame: gas density at late times in idealized cold-stream simulations
 as each new physical ingredient is added and dialed up. **Top:** self-gravity
 (none → weak → strong) — strong gravity fragments the stream into clumps.
 **Middle:** radiative cooling (none → weak → strong) — cooling reshapes the
-turbulent mixing layer. **Bottom:** magnetic fields at fixed cooling (weak →
-medium → strong) — fields smooth the interface and help the stream survive.
-Each row is governed by its own dimensionless number (Sections below). The
-magnetic-field row is from work not yet published.*
+turbulent mixing layer and the density distribution. **Bottom:** magnetic fields 
+at fixed cooling (weak → medium → strong) — fields smooth the interface and help 
+the stream survive. Each row is governed by its own dimensionless number (Sections 
+below). The magnetic-field row is from work not yet published.*
 
 Unlike the giant-clumps projects in this repository, where I built the
 measurement instruments for simulations run by others, here I posed the
@@ -28,43 +28,38 @@ lead theorist interpreting observations of cold-streams.
 ## The problem
 
 The most massive galaxies in the young Universe grew by feeding on narrow
-streams of cold gas that flowed in along the filaments of the cosmic web,
-through halos of hot gas. Whether a stream survives the journey or is
-shredded by the Kelvin–Helmholtz instability (KHI) at the interface 
-between the fast, cold, dense stream and the hot surroundings, determines
-how these galaxies were fed. The stream–halo system is far outside the
-regime where classical stability theory applies: the streams are supersonic,
-the density contrast is huge, gravity, radiative cooling, and magnetic
-fields all act at once, and the nonlinear outcome (disruption vs. survival)
-cannot be read off from linear theory.
+streams of cold gas that flowed in along filaments of the cosmic web,
+penetrating halos of hot gas that surround the galaxies. Whether a stream 
+survives the journey or is shredded by the Kelvin–Helmholtz instability 
+(KHI) at the interface between the rapidly inflowing cold stream and its hot 
+surroundings, determines how these galaxies were fed. The stream–halo system 
+is far outside the regime where classical stability theory applies: the streams 
+are supersonic, the density contrast is huge, gravity, radiative cooling, and 
+magnetic fields all act at once, and the nonlinear outcome (disruption vs. 
+survival) cannot be read off from linear theory.
 
 ## The method
 
 Rather than simulating the fully coupled system at once, the program builds
 from the bottom up: start from pure hydrodynamics, then admit one new physical
-ingredient at a time. Each *ingredient* is characterized by the *dimensionless
-number* that determines whether it changes the leading-order answer — the
-organizing principle of the whole program. (The distinction matters: a
-dimensionless number classifies new physics, not a new evolutionary stage. The
-nonlinear evolution of the hydrodynamic case, for instance, introduces no new
-number; its outcome is diagnosed by the ratio of the stream's disruption time
-to its virial-crossing time.)
+ingredient at a time. Each *new piece of physics* is characterized by a *dimensionless
+number* that determines whether it changes the leading-order answer. This is the
+organizing principle of the whole program. 
 
 | Physical ingredient | Governing dimensionless number | Works |
 |---|---|---|
 | Hydrodynamics | Mach number M_b, density contrast δ | [Mandelker et al. 2016](https://arxiv.org/abs/1606.06289) (linear); [Padnos, Mandelker et al. 2018](https://arxiv.org/abs/1803.09105) (2D nonlinear); [Mandelker et al. 2019](https://arxiv.org/abs/1806.05677) (3D nonlinear) |
 | Cosmological setting | stream radius / halo virial radius (set by halo mass & redshift) | [Mandelker et al. 2018](https://arxiv.org/abs/1711.09108); [Mandelker et al. 2020b](https://arxiv.org/abs/2003.01724); [Aung, Mandelker et al. 2024](https://arxiv.org/abs/2403.00912) |
-| Self-gravity | disruption time / free-fall time | [Aung, Mandelker et al. 2019](https://arxiv.org/abs/1903.09666); [Mandelker et al. 2018](https://arxiv.org/abs/1711.09108) |
-| Radiative cooling | disruption time / mixing-layer cooling time | [Mandelker et al. 2020a](https://arxiv.org/abs/1910.05344); [Mandelker et al. 2020b](https://arxiv.org/abs/2003.01724); [Aung, Mandelker et al. 2024](https://arxiv.org/abs/2403.00912) |
+| Self-gravity | KHI disruption time / free-fall time | [Aung, Mandelker et al. 2019](https://arxiv.org/abs/1903.09666); [Mandelker et al. 2018](https://arxiv.org/abs/1711.09108) |
+| Radiative cooling | KHI disruption time / mixing-layer cooling time | [Mandelker et al. 2020a](https://arxiv.org/abs/1910.05344); [Mandelker et al. 2020b](https://arxiv.org/abs/2003.01724); [Aung, Mandelker et al. 2024](https://arxiv.org/abs/2403.00912) |
 | Thermal shattering & stream–halo pressure contrast | cooling time / sound-crossing time | [Yao, Mandelker et al. 2025](https://arxiv.org/abs/2410.12914); [Yao, Mandelker & Oh 2026](https://arxiv.org/abs/2607.14090) |
 | Magnetic fields | plasma β | as yet unpublished (complete; presented at conferences) |
 
 Two pieces of the program are shown here in full, chosen because their code is
-the most *distinct* (the hydrodynamic and cooling stages share the same
-analysis machinery across most of the intermediate papers): the **linear
-theory with its simulation verification**, and the **radiative-cooling
-pipeline** end to end. The self-gravity and magnetic-field ingredients are
-shown through their key results rather than their code.
+the most *distinct*: the **linear theory with its simulation verification**, and 
+the **radiative-cooling pipeline** end to end. The self-gravity and magnetic-field ingredients 
+are shown through their key results rather than their code, which is qualitatively similar to 
+the code presented, and shares much of the same machinery.
 
 ---
 
