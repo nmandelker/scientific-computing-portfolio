@@ -102,7 +102,7 @@ Mandelker et al. 2016, Fig. 5.*
 ### Verification: seeding simulations with the theory's eigenmodes
 
 The theory was then tested in RAMSES simulations through a patch 
-(`linear_theory/verification/`) whose initial conditions can perturb 
+(`linear_theory/ramses_verification/`) whose initial conditions can perturb 
 a single fluid variable *or inject the full analytic eigenmode*. The 
 namelist literally takes the complex eigenfrequency computed by the 
 Mathematica notebook as an input parameter 
@@ -141,9 +141,8 @@ et al. 2016, Fig. 11.*
 
 The pivotal stage of the program, and the one shown here end to end. Adding
 radiative cooling changes the answer qualitatively: instead of being eroded
-by the instability, a cold stream can *grow* by entraining initially hot gas 
-that mixes, cools, and condenses in a turbulent radiative mixing layer (TRML) 
-that forms at the stream-halo interface. This is published in 
+by the instability, a cold stream can *grow*, entraining and cooling the hot
+gas it mixes with. This is published in
 [Mandelker et al. 2020a](https://arxiv.org/abs/1910.05344) (MNRAS 494, 2641).
 
 The governing dimensionless number for this stage is the ratio of the
@@ -151,6 +150,15 @@ The governing dimensionless number for this stage is the ratio of the
 `t_cool,mix / t_shear`. When mixed gas cools faster than the instability can
 disrupt the stream, hot material condenses onto the stream rather than
 tearing it apart.
+
+![Critical stream radius for entrainment vs disruption](figures/cooling_critical_radius.png)
+*The stage's dimensionless number as a survival criterion: the critical
+stream radius at which `t_cool,mix = t_shear`, as a function of stream density
+and density contrast. Streams larger than this (most real streams feeding
+massive halos) are in the entrainment-dominated, surviving regime. This is
+the cooling-stage version of the recurring "can the stream survive?" figure —
+and it is produced by `cooling_simulations/matlab/Rs_crit_panels.m`. From
+Mandelker et al. 2020a, Fig. 1.*
 
 ![Stream evolution without vs with cooling](figures/cooling_density_evolution.png)
 *The result, visually: gas density in an idealized stream simulation over
@@ -307,7 +315,7 @@ strong fields would suppress it. From the unpublished magnetic-fields study.*
 │   ├── nir_test_adiabatic.nb        ← Mathematica slab solver
 │   ├── *.m                          ← MATLAB analysis of the solutions
 │   ├── sample_output_ImP_00.csv     ← example solver output
-│   └── verification/                ← RAMSES patch + growth-measurement script
+│   └── ramses_verification/         ← RAMSES patch + growth-measurement scripts
 ├── cooling_simulations/             ← Radiative cooling (M20a): the full vertical slice
 │   ├── ramses_patch/                ← RAMSES patch with modified cooling + namelist
 │   ├── conversion/                  ← raw RAMSES → compact AMR-leaf format
