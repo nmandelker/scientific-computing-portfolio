@@ -290,15 +290,22 @@ state, forward-modeled into a predicted observable, then confronted with
 measurements — the same operation as sensor forward-modeling or state
 estimation, in a different domain.
 
-A second observable comes with code to back it. I forward-modeled these same
-cooling simulations into **synthetic quasar absorption sightlines** — ray-tracing
-through the simulated stream and hot halo to predict the ion column densities a
-telescope would measure — which were then compared with real circumgalactic
-absorption data in Hafen et al. 2024 (MNRAS 528, 39). That forward model is
-[`cooling_simulations/analysis/Sightlines.f90`](cooling_simulations/analysis/Sightlines.f90):
-generating synthetic observations from a physical simulation for direct
-comparison with measurements — the same operation as mock-sensor or
-synthetic-data generation, in a different domain.
+A second observable comes with code, and out of a later collaboration. After
+this project was published, I contributed to a multi-group code-comparison
+study (Hafen et al. 2024, MNRAS 528, 39), prompted by observers wanting to
+know how far their standard methods can be trusted for systems like these. I
+extended my existing analysis codebase to forward-model the simulations into
+**synthetic quasar absorption sightlines** — ray-tracing through the simulated
+stream and hot halo to predict the ion column densities an instrument would
+record. The goal was not to reproduce any specific real system, but to use the
+simulation as a *known ground truth* and measure how much the commonly-used
+observational methods bias the quantities they recover. That code is
+[`cooling_simulations/analysis/Sightlines.f90`](cooling_simulations/analysis/Sightlines.f90),
+and it demonstrates two transferable things at once: generating synthetic
+observations from a physical model to characterize a measurement method's
+systematic biases against known truth (synthetic-data / measurement-validation
+work), and extending a mature codebase to meet a downstream collaboration's
+concrete, scoped ask.
 
 ![Lyman-alpha luminosity is robust to magnetic fields](figures/lya_dissipation_vs_beta.png)
 *Robustness of the prediction to added physics: the dissipation luminosity
