@@ -2,10 +2,8 @@
 
 This directory is a vertical slice through the pipeline behind
 [Mandelker et al. 2020a](https://arxiv.org/abs/1910.05344): from running the
-idealized cold-stream simulations to the analysis behind the paper's figures.
-It is the one place in the cold-streams project shown end to end — designing and running
-the numerical experiments, converting the raw outputs, and measuring stream
-properties. Presented as-is, research code.
+idealized cold-stream simulations to the analysis behind the paper's figures. 
+Presented as-is, research code.
 
 The simulations use the public AMR code
 [RAMSES](https://arxiv.org/abs/astro-ph/0111367); RAMSES itself is not
