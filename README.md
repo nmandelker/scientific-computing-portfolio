@@ -39,7 +39,7 @@ in galaxies as they were ~10 billion years ago:
 8 lines of differential equations and validated against high-cadence tracking from the pipeline above and compared to HST observations (Dekel, Mandelker et al. 2022). | ✅ |
 | [Turbulence decomposition](Turbulence_Decomposition/) | Helmholtz decomposition of turbulent velocity fields (Fortran + MKL FFTs), validated on synthetic turbulence with known ground truth, showing that clumps form where compressive turbulence is anomalously strong, resolving a puzzle where classical stability theory said clumps shouldn't form (Mandelker et al. 2025). | ✅ |
 
-### Cold streams (design + execution of numerical experiments)
+### [Cold streams](Cold_Stream_Stability/) (design + execution of numerical experiments)
 Analytic stability theory for cold gas streams feeding early galaxies,
 tested with idealized high-resolution simulations I designed and ran with
 the RAMSES code. Adding one physical ingredient at a time (gravity,
@@ -47,7 +47,7 @@ radiative cooling, magnetic fields), I identified at each step the
 dimensionless number that determines whether the new physics changes the
 answer. Included here is also a forward model of an observable signal 
 (Lyman-alpha emission) later applied by independent observational teams, 
-including in *Science*. — 🚧 in preparation
+including in *Science*. — ✅ done
 
 ### AREPO / moving-mesh projects (Python)
 Analysis pipelines for a different class of simulations, plus
