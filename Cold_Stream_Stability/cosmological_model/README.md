@@ -5,7 +5,9 @@ prediction of an observable signal (Lyman-α emission) as a function of halo
 mass and redshift. MATLAB, presented as-is. Unlike the other stages, this one
 ran no new simulations. It is a pure analytic model for stream properties as a 
 function of halo mass and redshift from cosmological considerations, with the 
-entrainment physics studied in the cooling simulations of M20a added on top.
+entrainment physics studied in the cooling simulations of M20a added on top. The
+model was later simulated explicitly and verified in
+[Aung, Mandelker et al. 2024](https://arxiv.org/abs/2403.00912).
 
 ## The model, from inputs to observable
 
