@@ -9,7 +9,7 @@ the paper's figures, not the complete set.
 
 | File | Role |
 |---|---|
-| `nir_test_adiabatic.nb` | Mathematica: numerically solves the linear KHI dispersion relation for the planar-slab geometry — the central case of the analysis. The single-interface *sheet* is simpler (a quartic polynomial, solved directly in MATLAB in `compressible_sheet_growth_times.m`); the *cylinder* is harder, so the paper solves the slab first and carries the results over to the cylinder by analogy (the tanh → Bessel-function correspondence, §2.4). The cylinder's dispersion relation was solved in a separate notebook, not included here. Exports the slab solution grids as CSV (see `sample_output_ImP_00.csv`). |
+| `nir_test_adiabatic.nb` | Mathematica: numerically solves the linear KHI dispersion relation for the planar-slab geometry — the central case of the analysis. The single-interface *sheet* is much simpler and is solved directly in MATLAB in `compressible_sheet_growth_times.m`; the *cylinder* is qualitatively similar to the slab, as discussed in the paper, and was solved in a separate notebook, not included here. Exports the slab solution grids as CSV (see `sample_output_ImP_00.csv`). |
 | `compressible_sheet_growth_times.m` | Solves and analyzes the sheet (single-interface) dispersion relation directly. (M16, Fig. 1). |
 | `compressible_slab_growth_times.m` | Growth-time analysis of the slab solutions from the notebook. |
 | `KHI_phase_diagrams_analytic.m` | Stability phase diagrams over the (M_b, δ) parameter space (M16, Fig. 11). |
