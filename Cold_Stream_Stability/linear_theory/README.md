@@ -1,16 +1,20 @@
 # Linear theory — Mandelker et al. 2016
 
-The analytic engine of the cold-streams program, presented as-is.
+A representative sample of the MATLAB analysis behind the linear theory of
+Mandelker et al. 2016, presented as-is. The full analysis is considerably
+larger — the paper works out the marginal-stability and resonance behaviour of
+the slab in detail across several appendices, in many more scripts. These are a
+curated illustration of how the numerically-solved dispersion relations became
+the paper's figures, not the complete set.
 
 | File | Role |
 |---|---|
-| `nir_test_adiabatic.nb` | Mathematica: numerically solves the linear KHI dispersion relation for the planar-slab geometry — the hardest of the three cases — exporting solution grids as CSV (see `sample_output_ImP_00.csv`). (The single-interface sheet reduces to a quartic polynomial solved directly in MATLAB; the cylinder was solved in a separate notebook, not included here.) |
-| `compressible_sheet_growth_times.m` | Solves and analyzes the sheet (single-interface) dispersion relation directly — the quartic case (M16, Fig. 1). |
+| `nir_test_adiabatic.nb` | Mathematica: numerically solves the linear KHI dispersion relation for the planar-slab geometry — the hardest of the three cases, and the core of the analysis. Exports the solution grids as CSV (see `sample_output_ImP_00.csv`). The simpler cases were handled elsewhere: the single-interface *sheet* reduces to a quartic polynomial solved directly in MATLAB (`compressible_sheet_growth_times.m`), and the *cylinder* — functionally similar to the slab (§2.4 of the paper) — was solved in a separate notebook not included here. |
+| `compressible_sheet_growth_times.m` | Solves and analyzes the sheet (single-interface) dispersion relation directly. (M16, Fig. 1). |
 | `compressible_slab_growth_times.m` | Growth-time analysis of the slab solutions from the notebook. |
 | `KHI_phase_diagrams_analytic.m` | Stability phase diagrams over the (M_b, δ) parameter space (M16, Fig. 11). |
-| `marginally_stable_cylinder.m` | Marginal-stability boundaries for the cylindrical stream. |
-| `azimuthal_modes.m` | Structure of the azimuthal (m = 0, 1, 2, ...) modes of the cylinder (M16, Fig. 6). |
-| `P1_cyl.m`, `cyl_mode_structure.m` | Eigenmode pressure structure and growth rates in the cylinder. |
+| `azimuthal_modes.m` | Structure of the azimuthal modes (m = 0, 1, 2, ...) of the cylinder — the cleanest cylinder example, and a paper figure (M16, Fig. 6). |
+| `P1_cyl.m`, `cyl_mode_structure.m` | Pressure-perturbation mode structure and growth rates for the cylindrical stream — the cylinder analogue of the slab analysis (paper §2.4). |
 
 ## `verification/`
 
@@ -22,7 +26,7 @@ measurement scripts:
 | `condinit.f90` | Initial conditions: sheet/slab setup with a perturbation that is either a single perturbed variable (density, pressure, velocity, interface shape) or a *full analytic eigenmode*, selected by namelist parameters. |
 | `hydro_parameters.f90`, `read_hydro_params.f90`, `init_flow_fine.f90` | Parameter definitions, namelist reading, and flow initialization for the patch. |
 | `kh_eigenmode.nml` | Configuration for eigenmode-seeded verification runs, including the complex eigenfrequency `pert_omega` computed by the Mathematica notebook. |
-| `kh_production.nml` | Configuration for the paper's production runs with a single-variable perturbation. |
+| `kh_production.nml` | Configuration for the runs with a single-variable perturbation. |
 | `sample_submit.sh` | Example cluster submission script. |
 | `Eigen_growth.m` | Measures perturbation growth rates in the simulation outputs for comparison with theory (M16, Fig. 8). |
 
