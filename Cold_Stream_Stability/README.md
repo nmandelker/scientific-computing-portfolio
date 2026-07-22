@@ -237,16 +237,16 @@ idealized-simulation results into a prediction of a real, observable signal**,
 which independent teams then tested against telescope data.
 
 The cosmological setting fixes the two base numbers (M_b, δ) from first
-principles — a stream in pressure equilibrium with a hot halo, inflowing at
-roughly the virial velocity, has δ ~ 10–100 and M_b ~ 1 — and ties them to
-halo mass and redshift. Folding in the halo potential and the cooling-driven
-dissipation from the stages above, the model
-([Mandelker et al. 2020b](https://arxiv.org/abs/2003.01724)) predicts how much
-energy each stream radiates, and at what wavelength, as it falls in. The code
-is in `cosmological_model/`.
+principles, as a function of halo mass and redshift, by assuming that the 
+stream is inflowing at the halo virial velocity and is in pressure equilibrium 
+with the hot halo at the virial temperature. Folding in the impact of the halo 
+potential on the equilibrium configuration, and the cooling-driven dissipation 
+from the stages above, the model ([Mandelker et al. 2020b](https://arxiv.org/abs/2003.01724)) 
+predicts how much energy each stream radiates, and at what wavelength, as it 
+falls in. The code is in `cosmological_model/`.
 
 ![Predicted stream velocity, mass growth, and Lyman-alpha luminosity](figures/lya_luminosity_vs_mass_z.png)
-*The forward model's output, as a function of halo mass and (colours) redshift:
+*The forward model's output, as a function of halo mass and for different redshifts (colours):
 stream infall velocity (left), cold-mass growth by entrainment (centre), and
 the dissipation luminosity radiated mostly as Lyman-α (right). For massive
 halos (10¹²–10¹³ M☉) the model predicts Lyman-α luminosities of
@@ -257,16 +257,20 @@ Mandelker et al. 2020b.*
 *The survival map: the ratio of stream radius to the critical radius for
 cooling to beat disruption, versus halo mass, at three redshifts. Essentially
 all cosmologically realistic streams (solid lines) sit well above the
-disruption threshold (grey) — cold streams survive their journey to the
-galaxy. From Mandelker et al. 2020b.*
+disruption threshold (grey). The conclusion is that most cold streams 
+survive their journey to the galaxy. From Mandelker et al. 2020b.* 
 
 **Validated against real data.** The model was carried through to direct
 comparison with observations in
 [Aung, Mandelker et al. 2024](https://arxiv.org/abs/2403.00912): the
-stream-entrainment physics feeds the analytic gas-regulator ("bathtub")
+stream-entrainment physics is added onto the analytic gas-regulator ("bathtub")
 model of [Dekel & Mandelker 2014](https://academic.oup.com/mnras/article/444/3/2071/1049825)
 (MNRAS 444, 2071) — a framework I co-developed — which predicts how fast
-galaxies form stars over cosmic time.
+galaxies form stars over cosmic time. This is the same class of analytic 
+gas-regulator model applied to giant clumps in the 
+[clump-evolution project](../Clump_Evolution_Model/) elsewhere
+in this repository — one framework, two very different problems, each 
+tested against data.
 
 ![Predicted star-formation history vs observed data](figures/model_vs_obs_sfr_1e12.png)
 *The model against measurements: specific star-formation rate versus redshift
@@ -277,30 +281,28 @@ built up from idealized stream simulations, reproduces the observed
 star-formation history with no fitting to these data. From Aung, Mandelker
 et al. 2024.*
 
-This is the same class of analytic gas-regulator model applied to giant
-clumps in the [clump-evolution project](../Clump_Evolution_Model/) elsewhere
-in this repository — one framework, two very different problems, each tested
-against data.
-
 The Lyman-α side of the forward model was likewise used to interpret actual
-detections: Daddi et al. 2022b applied it to an observed cold stream, and it
-appears in Emonts et al. 2024 (*Science*), on which I am a co-author. In
-industry terms this is the full loop — a physics-based model of a hidden
-state, forward-modeled into a predicted observable, then confronted with
-measurements — the same operation as sensor forward-modeling or state
-estimation, in a different domain.
+detections: Daddi et al. 2021 and 2022b applied it to observations of cold 
+streams and of galactic specific SFRs across redshift. It was also used in 
+Emonts et al. 2024 (*Science*), on which I am a co-author, to interpret direct 
+observations of cold streams with ALMA, and in several papers (Wang et al 2021; 
+Arrigoni Battaia et al 2022; Johnson et al 2022) to interpret MUSE observations 
+of cold streams and CGM gas. In industry terms this is the full loop: a 
+physics-based model of a hidden state, forward-modeled into a predicted observable, 
+then confronted with measurements. This is the same operation as sensor forward-modeling 
+or state estimation, in a different domain. 
 
 A second observable comes with code, and out of a later collaboration. After
 this project was published, I contributed to a multi-group code-comparison
 study (Hafen et al. 2024, MNRAS 528, 39), prompted by observers wanting to
-know how far their standard methods can be trusted for systems like these. I
-extended my existing analysis codebase to forward-model the simulations into
-**synthetic quasar absorption sightlines** — ray-tracing through the simulated
-stream and hot halo to predict the ion column densities an instrument would
-record. The goal was not to reproduce any specific real system, but to use the
-simulation as a *known ground truth* and measure how much the commonly-used
-observational methods bias the quantities they recover. That code is
-[`cooling_simulations/analysis/Sightlines.f90`](cooling_simulations/analysis/Sightlines.f90),
+know how far their standard methods for interpreting absorption-line measurements 
+can be trusted for systems like these. I extended my existing analysis codebase 
+to forward-model the simulations into **synthetic quasar absorption sightlines**, 
+ray-tracing through the simulated stream and hot halo to predict the ion column 
+densities an instrument would record. The goal was not to reproduce any specific 
+real system, but to use the simulation as a *known ground truth* and measure how 
+much the commonly-used observational methods bias the quantities they recover. That 
+code is [`cooling_simulations/analysis/Sightlines.f90`](cooling_simulations/analysis/Sightlines.f90),
 and it demonstrates two transferable things at once: generating synthetic
 observations from a physical model to characterize a measurement method's
 systematic biases against known truth (synthetic-data / measurement-validation
@@ -310,7 +312,7 @@ concrete, scoped ask.
 ![Lyman-alpha luminosity is robust to magnetic fields](figures/lya_dissipation_vs_beta.png)
 *Robustness of the prediction to added physics: the dissipation luminosity
 over time for a range of plasma β. For realistically weak fields (β ≳ 1000)
-the luminosity tracks the pure-hydrodynamic case (green/black) — so the
+the luminosity tracks the pure-hydrodynamic case (green/black), so the
 observable prediction is largely unchanged by magnetic fields, and only very
 strong fields would suppress it. From the unpublished magnetic-fields study.*
 
