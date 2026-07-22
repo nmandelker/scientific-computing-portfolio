@@ -76,7 +76,9 @@ phase diagrams, mode structures, and stability boundaries.
 *The parameter space in one figure: KHI growth rate for a single interface
 (sheet) as a function of the two governing dimensionless numbers: Mach
 number of the stream velocity with respect to the background sound speed, M_b, 
-and the density ratio (contrast) between the stream and the background δ. 
+and the density ratio (contrast) between the stream and the background δ. Such modes 
+are called **surface modes** as they live at the interface between the two fluids. 
+The white line is an analytical solution to the curve above which surface modes stabilize. 
 From Mandelker et al. 2016, Fig. 1.*
 
 The paper's central result is that in the supersonic regime, where
@@ -85,11 +87,11 @@ a family of slower-growing **body modes** (waves reverberating inside the
 stream itself) takes over the instability:
 
 ![Numerical solution of the slab dispersion relation](figures/slab_dispersion_solution.png)
-*Numerical solution of the slab dispersion relation at M_b = 1.5, δ = 100. In this 
-regime, the single interface is stable yet the slab is unstable through body modes. 
-Growth rates (left) and phase velocities (right) for the mode families. The solution 
-grids behind this figure were produced by the notebook in `linear_theory/`. From 
-Mandelker et al. 2016, Fig. 4.*
+*Numerical solution of the slab dispersion relation at M_b = 1.5, δ = 100, with the analytical 
+approximation overlaid (thick dot-dashed line). In this regime, the single interface is stable 
+yet the slab is unstable through body modes. Growth rates (left) and phase velocities (right) 
+for the mode families. The solution grids behind this figure were produced by the notebook in 
+`linear_theory/`. From Mandelker et al. 2016, Fig. 4.*
 
 ![Pressure perturbation structure of the first six modes](figures/slab_mode_structure.png)
 *What a "body mode" actually is: pressure-perturbation structure of the
@@ -117,9 +119,10 @@ predicted exponential growth (dashed). From Mandelker et al. 2016, Fig. 8.*
 *The stronger test: a simulation seeded with a generic (non-eigenmode)
 perturbation spontaneously develops the structure of the predicted
 fastest-growing eigenmode (left and centre panels vs. the analytic
-prediction on the right) — the simulation "discovers" the theory's answer.
-The measured growth rates likewise converge to the fastest-growing mode's
-prediction (M16, Fig. 9). From Mandelker et al. 2016, Fig. 10.*
+prediction on the right). In other words, the simulation "discovers" 
+the theory's answer. The measured growth rates likewise converge to 
+the fastest-growing mode's prediction (M16, Fig. 9). From Mandelker 
+et al. 2016, Fig. 10.*
 
 ### First application to real streams
 
