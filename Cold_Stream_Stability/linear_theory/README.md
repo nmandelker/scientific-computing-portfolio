@@ -12,7 +12,7 @@ The analytic engine of the cold-streams program, presented as-is.
 | `azimuthal_modes.m` | Structure of the azimuthal (m = 0, 1, 2, ...) modes of the cylinder (M16, Fig. 6). |
 | `P1_cyl.m`, `cyl_mode_structure.m` | Eigenmode pressure structure and growth rates in the cylinder. |
 
-## `ramses_verification/`
+## `verification/`
 
 The RAMSES patch used to verify the linear theory in simulations, plus the
 measurement scripts:

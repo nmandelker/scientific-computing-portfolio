@@ -100,7 +100,7 @@ Mandelker et al. 2016, Fig. 5.*
 ### Verification: seeding simulations with the theory's eigenmodes
 
 The theory was then tested in RAMSES simulations through a patch 
-(`linear_theory/ramses_verification/`) whose initial conditions can perturb 
+(`linear_theory/verification/`) whose initial conditions can perturb 
 a single fluid variable *or inject the full analytic eigenmode*. The 
 namelist literally takes the complex eigenfrequency computed by the 
 Mathematica notebook as an input parameter 
@@ -312,7 +312,7 @@ strong fields would suppress it. From the unpublished magnetic-fields study.*
 │   ├── nir_test_adiabatic.nb        ← Mathematica slab solver
 │   ├── *.m                          ← MATLAB analysis of the solutions
 │   ├── sample_output_ImP_00.csv     ← example solver output
-│   └── ramses_verification/         ← RAMSES patch + growth-measurement scripts
+│   └── verification/                ← RAMSES patch + growth-measurement script
 ├── cooling_simulations/             ← Radiative cooling (M20a): the full vertical slice
 │   ├── ramses_patch/                ← RAMSES patch with modified cooling + namelist
 │   ├── conversion/                  ← raw RAMSES → compact AMR-leaf format
