@@ -191,33 +191,33 @@ the top of this page is the qualitative summary).
 
 ### Self-gravity
 
-When the stream's self-gravity is strong enough — when the disruption time
-exceeds the free-fall time — the stream can fragment under its own weight
-before the instability destroys it. Applied to a real cosmological simulation,
+When the stream's self-gravity is strong enough, namely when the free-fall time 
+is shorter than the KHI disruption time, the stream can fragment under its own 
+weight before the instability destroys it. Applied to a real cosmological simulation,
 this predicts star formation *inside the streams*, out in the halo, far from
 the galaxy: a candidate formation channel for metal-poor globular clusters
 ([Mandelker et al. 2018](https://arxiv.org/abs/1711.09108)).
 
 ![Streams fragmenting into star-forming clumps in a cosmological simulation](figures/self_gravity_gc_formation.png)
 *Simulated galaxy VELA19 at redshift z = 6.07, ~13 billion years ago. Columns:
-dark-matter, gas, and young-star (< 100 Myr) surface density; top row a wide
-view (solid circle = halo virial radius), bottom row a zoom. Cold streams feed
-the halo along the cosmic web; the circles mark dense, star-forming clumps that
-have formed within the streams themselves, outside the central galaxy — the
-predicted globular-cluster birthplaces. From Mandelker et al. 2018.*
+surface density maps of dark-matter, gas, and young-stars (< 100 Myr); top row 
+a wide view (solid circle = halo virial radius), bottom row a zoom (dashed circle 
+= 0.3 times the halo virial radius). Cold streams feed the halo along the cosmic 
+web; the small circles mark dense, star-forming clumps that have formed within the 
+streams themselves, outside the central galaxy, with no dark-matter overdensities. 
+These are the predicted globular-cluster birthplaces. From Mandelker et al. 2018.*
 
 ### Magnetic fields
 
 Adding magnetic fields introduces the plasma β (thermal / magnetic pressure).
-Two results stand out, both from the (as-yet-unpublished, conference-presented)
-magnetic-fields study:
+Two results stand out (as-yet-unpublished, conference-presented):
 
 ![Magnetic field amplification in the mixing layer](figures/mhd_field_amplification.png)
-*Field amplification: radial profiles of the mean plasma β at late times, with
-cooling (left) and without (right). Even a stream that starts essentially
-unmagnetized (β ≈ 10⁵, black) has its field amplified toward equipartition
-(β ≈ 1–10) in the cooling-driven turbulent mixing layer near the stream core.
-The amplification is far stronger when cooling is present.*
+*Field amplification with cooling: radial profiles of the mean plasma β at
+late times, for a range of initial field strengths. Even a stream that starts
+essentially unmagnetized (β ≈ 10⁵, black) has its field amplified toward
+equipartition (β ≈ 1–10) in the cooling-driven turbulent mixing layer near the
+stream core.*
 
 ![The mixing-layer entrainment theory generalizes to MHD](figures/mhd_entrainment_theory.png)
 *The method surviving a new ingredient. Left: cold-mass growth for a range of
@@ -232,7 +232,7 @@ mixing-layer theory derived for the pure-cooling case describes every run with
 ## From model to telescope: predicting what's observable
 
 This is the payoff of the whole program, and the piece that translates most
-directly outside astrophysics: a **physics-based forward model that turns the
+directly to outside astrophysics: a **physics-based forward model that turns the
 idealized-simulation results into a prediction of a real, observable signal**,
 which independent teams then tested against telescope data.
 
