@@ -10,7 +10,7 @@ research code.
 
 The simulations use the public AMR code
 [RAMSES](https://arxiv.org/abs/astro-ph/0111367); RAMSES itself is not
-included — only my patches to it and my analysis code.
+included, only my patches to it and my analysis code.
 
 ## The pipeline, in order
 
@@ -18,28 +18,28 @@ included — only my patches to it and my analysis code.
 
 A RAMSES "patch" replaces or extends specific source files of the public
 code. This one configures an idealized cold stream (a dense, cold cylinder
-in a hot wind) with radiative cooling:
+pressure confined by and flowing through a static, hot background) with 
+radiative cooling and heating:
 
 | File | Role |
 |---|---|
 | `condinit.f90` | Initial conditions: the cold cylindrical stream, hot background, shear velocity, and the perturbation (single-variable or eigenmode). |
-| `cooling_module.f90`, `cooling_fine.f90` | RAMSES's stock radiative-cooling and UV-heating routines with targeted modifications for the idealized (non-cosmological) setup: control over the redshift of the UV background, and a **temperature ceiling `Tmax_cool` above which cooling is switched off** (keeping the hot background from cooling — the physical counterpart of the usual temperature *floor*). Metallicity-dependent cooling per zone was already standard; the stream and background are assigned different metallicities (`met_s`, `met_b`) as passive scalars in `condinit.f90`. |
+| `cooling_module.f90`, `cooling_fine.f90` | RAMSES's stock radiative-cooling and UV-heating routines with targeted modifications for the idealized (non-cosmological) setup: control over the redshift of the UV background, and a **temperature ceiling `Tmax_cool` above which cooling is switched off** (keeping the hot background from cooling). The stream and background are assigned different metallicities (`met_s`, `met_b`) which impacts their cooling rates, and different passive scalars which allow us to trace phase mixing, in `condinit.f90`. |
 | `hydro_parameters.f90`, `read_hydro_params.f90`, `read_params.f90` | Parameter definitions and namelist reading for the added stream/cooling parameters. |
 | `adaptive_loop.f90`, `init_time.f90` | Modifications to the main time loop and initialization for the idealized-box setup and custom outputs. |
-| `kh_example.nml` | A representative namelist. Many runs span a grid of Mach number, density contrast, stream density, and metallicity, so no single namelist captures the whole suite — this is one example; individual parameters (e.g. the cooling temperature floor) vary per run. |
+| `kh_example.nml` | A representative namelist. Many runs span a grid of Mach number, density contrast, stream density, and metallicity, so no single namelist captures the whole suite. This is one example; individual parameters vary per run. |
 
 ### 2. `conversion/` — raw outputs → compact analysis format
 
-RAMSES writes the full AMR hierarchy. For analysis I convert each snapshot to
-a compact format keeping only the AMR *leaf* cells, laid out similarly (though
-not identically) to the post-processed VELA cosmological outputs used in the
-giant-clumps projects — much smaller and simpler to analyze.
+RAMSES writes the full AMR hierarchy and outputs one file per core used during runtime for every snapshot. 
+For analysis, I convert each snapshot to a single file per snapshot, keeping only the AMR *leaf* cells in 
+a compact format. These are much smaller and simpler to analyze.
 
 | File | Role |
 |---|---|
 | `make_ART_format.f90` | Reads a raw RAMSES snapshot and writes the leaf-only binary (density, velocity, pressure, passive scalar / "colour", cell size). |
 | `loop_output_ART.f90` | Driver that runs the conversion over all snapshots of a simulation. |
-| `time.f90` | Reads each snapshot's `info_*.txt` header and writes a catalog of the exact output times (code units), so the analysis stage can attach a timestamp to each compacted snapshot without re-parsing the raw outputs. |
+| `time.f90` | Reads each snapshot's `info_*.txt` header and writes a catalog of the exact output times (in code units), so the analysis stage can attach a timestamp to each compacted snapshot without re-parsing the raw outputs. |
 | `submit_loop_output_ART.sh` | Example HPC batch submission script. |
 
 ### 3. `analysis/` — measure stream properties
@@ -51,15 +51,10 @@ this is that consolidated version.
 
 | File | Role |
 |---|---|
-| `stream_analysis_combined.f90` | The main analysis: cold-gas mass, stream volume, centre-of-mass velocity (deceleration), turbulent velocity dispersion in the mixing layer, kinetic/thermal energy budgets, radial profiles, and density PDFs. |
+| `stream_analysis_combined.f90` | The main analysis: cold-gas mass, stream volume, centre-of-mass velocity (deceleration), turbulent velocity dispersion in the mixing layer, kinetic/thermal energy budgets, radial profiles, density PDFs, and other diagnostics of phase mixing and stream evolution. |
 | `stream_analysis_collate.f90` | Aggregates the per-snapshot outputs into time series for plotting. |
 | `compute_cooling_rates.f90` | Computes the net radiative cooling / UV-heating rates in the simulations, for the energy-budget figures. |
-| `Sightlines.f90` | A *forward model*, not a property measurement: ray-traces synthetic quasar absorption sightlines through the simulated stream and hot halo, predicting the ion column densities a telescope would observe. Written for the code-comparison study of Hafen et al. 2024 (MNRAS 528, 39), which used simulations as a known ground truth to quantify the biases of common observational methods (not to reproduce specific real systems) — see the "From model to telescope" section of the [project README](../). |
-
-A numerical note: the turbulent velocity dispersion is accumulated as the
-mass-weighted `(v − ⟨v⟩)²` in double precision, rather than the
-`⟨v²⟩ − ⟨v⟩²` form — the latter suffers catastrophic cancellation and gave
-unreliable dispersions in early single-precision versions.
+| `Sightlines.f90` | A *forward model*, not a property measurement: ray-traces synthetic quasar absorption sightlines through the simulated stream and hot halo, predicting the ion column densities and line-of-sight velocities a telescope would observe. Written for the code-comparison study of Hafen et al. 2024 (MNRAS 528, 39), which used simulations as a known ground truth to quantify the biases of common observational methods (not to reproduce specific real systems) — see the "From model to telescope" section of the [project README](../). |
 
 ### 4. `matlab/` — analytic estimates and final plots
 
