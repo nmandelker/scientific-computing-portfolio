@@ -172,12 +172,12 @@ simulations. This is one of the many diagnostics computed by the analysis
 pipeline in `cooling_simulations/analysis/`. From Mandelker et al. 2020a, 
 Fig. 8.*
 
-**The vertical slice.** `cooling_simulations/` contains the full pipeline
-behind these results: the RAMSES patch that sets up and runs the simulations, 
-the Fortran tools that convert raw outputs to a compact analysis format, the 
-Fortran analysis codes that measure stream properties, and the MATLAB layer 
-for the analytic estimates and final plots. See its [README](cooling_simulations/) 
-for the walkthrough.
+**The vertical slice.** `cooling_simulations/` contains the pipeline behind
+these results: the RAMSES patch that sets up and runs the simulations, the
+Fortran tools that convert raw outputs to a compact analysis format, and the
+Fortran analysis codes that measure stream properties (and forward-model
+synthetic observations). See its [README](cooling_simulations/) for the
+walkthrough.
 
 The linear theory of KHI *with* cooling (a much larger parameter space —
 cooling-curve slopes and densities in each medium) was also worked out in
@@ -329,8 +329,7 @@ strong fields would suppress it. From the unpublished magnetic-fields study.*
 ├── cooling_simulations/             ← Radiative cooling (M20a): the full vertical slice
 │   ├── ramses_patch/                ← RAMSES patch with modified cooling + namelist
 │   ├── conversion/                  ← raw RAMSES → compact AMR-leaf format
-│   ├── analysis/                    ← Fortran stream-property measurement
-│   └── matlab/                      ← analytic estimates + plotting
+│   └── analysis/                    ← Fortran stream-property measurement + Sightlines forward model
 ├── cosmological_model/              ← Forward model (M20b): stream properties &
 │                                      Lyman-α emission vs halo mass and redshift
 └── figures/                         ← publication figures (my papers, cited)

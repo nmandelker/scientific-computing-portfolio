@@ -4,9 +4,8 @@ This directory is the complete pipeline behind
 [Mandelker et al. 2020a](https://arxiv.org/abs/1910.05344): from running the
 idealized cold-stream simulations to the figures in the paper. It is the one
 place in the cold-streams project shown end to end — designing and running
-the numerical experiments, converting the raw outputs, measuring stream
-properties, and producing the analytic estimates and plots. Presented as-is,
-research code.
+the numerical experiments, converting the raw outputs, and measuring stream
+properties. Presented as-is, research code.
 
 The simulations use the public AMR code
 [RAMSES](https://arxiv.org/abs/astro-ph/0111367); RAMSES itself is not
@@ -56,15 +55,10 @@ this is that consolidated version.
 | `compute_cooling_rates.f90` | Computes the net radiative cooling / UV-heating rates in the simulations, for the energy-budget figures. |
 | `Sightlines.f90` | A *forward model*, not a property measurement: ray-traces synthetic quasar absorption sightlines through the simulated stream and hot halo, predicting the ion column densities and line-of-sight velocities a telescope would observe. Written for the code-comparison study of Hafen et al. 2024 (MNRAS 528, 39), which used simulations as a known ground truth to quantify the biases of common observational methods (not to reproduce specific real systems) — see the "From model to telescope" section of the [project README](../). |
 
-### 4. `matlab/` — analytic estimates and final plots
-
-| File | Role |
-|---|---|
-| `Rs_crit_panels.m` | Computes and plots the critical stream radius where `t_cool,mix = t_shear` — the paper's Fig. 1 (the survival criterion). |
-| `Rs_over_cs_tcool.m`, `tcool_mix_over_tsc.m`, `find_tcool_mix_over_tshear.m` | The governing dimensionless numbers: mixing-layer cooling time vs. shear and sound-crossing times, as functions of stream properties. |
-| `timescale_comparison.m` | Compares the relevant timescales (cooling, shear, sound-crossing, disruption) across the parameter space. |
-| `simulation_cooling_check.m` | Validates the cooling implemented in the simulations against the analytic cooling function. |
-| `find_cooling_equilibrium.m`, `cooling_equilibrium.m`, `dlnL_dlnT.m` | Helpers: thermal-equilibrium temperature and local slope of the cooling curve, used by the estimates above. |
+The analytic estimates behind the cooling criterion (the governing timescale
+ratios and the survival radius) were computed in a small MATLAB layer, not
+included here; the more substantial analytic modelling is in the
+[`cosmological_model/`](../cosmological_model/) directory of this project.
 
 Raw simulation outputs are not included (too large); the figures show what the
 pipeline produces.
