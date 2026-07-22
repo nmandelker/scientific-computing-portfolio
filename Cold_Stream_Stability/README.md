@@ -283,11 +283,11 @@ et al. 2024.*
 
 The Lyman-α side of the forward model was likewise used to interpret actual
 detections. Independent teams applied it to real data with no involvement from 
-me — Daddi et al. 2021/2022b (cold streams and galactic specific-SFR trends 
-across redshift), and Wang et al. 2021, Arrigoni Battaia et al. 2022, and 
+me: Daddi et al. 2021/2022b (cold streams and galactic specific-SFR trends 
+across redshift); Wang et al. 2021, Arrigoni Battaia et al. 2022, and 
 Johnson et al. 2022 (MUSE observations of cold streams and circumgalactic gas). 
-And it was used to interpret direct ALMA observations of a cold stream in 
-Emonts et al. 2024 — a *Science* paper on which I am a co-author. In industry 
+It was also used to interpret direct ALMA observations of a cold stream in 
+Emonts et al. 2024, a *Science* paper on which I am a co-author. In industry 
 terms this is the full loop: a 
 physics-based model of a hidden state, forward-modeled into a predicted observable, 
 then confronted with measurements. This is the same operation as sensor forward-modeling 
