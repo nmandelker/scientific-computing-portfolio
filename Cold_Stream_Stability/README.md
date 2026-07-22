@@ -326,7 +326,7 @@ strong fields would suppress it. From the unpublished magnetic-fields study.*
 │   ├── *.m                          ← MATLAB analysis of the solutions
 │   ├── sample_output_ImP_00.csv     ← example solver output
 │   └── verification/                ← RAMSES patch + growth-measurement script
-├── cooling_simulations/             ← Radiative cooling (M20a): the full vertical slice
+├── cooling_simulations/             ← Radiative cooling (M20a): the vertical slice (patch → analysis)
 │   ├── ramses_patch/                ← RAMSES patch with modified cooling + namelist
 │   ├── conversion/                  ← raw RAMSES → compact AMR-leaf format
 │   └── analysis/                    ← Fortran stream-property measurement + Sightlines forward model
