@@ -39,6 +39,7 @@ giant-clumps projects — much smaller and simpler to analyze.
 |---|---|
 | `make_ART_format.f90` | Reads a raw RAMSES snapshot and writes the leaf-only binary (density, velocity, pressure, passive scalar / "colour", cell size). |
 | `loop_output_ART.f90` | Driver that runs the conversion over all snapshots of a simulation. |
+| `time.f90` | Reads each snapshot's `info_*.txt` header and writes a catalog of the exact output times (code units), so the analysis stage can attach a timestamp to each compacted snapshot without re-parsing the raw outputs. |
 | `submit_loop_output_ART.sh` | Example HPC batch submission script. |
 
 ### 3. `analysis/` — measure stream properties
@@ -53,6 +54,7 @@ this is that consolidated version.
 | `stream_analysis_combined.f90` | The main analysis: cold-gas mass, stream volume, centre-of-mass velocity (deceleration), turbulent velocity dispersion in the mixing layer, kinetic/thermal energy budgets, radial profiles, and density PDFs. |
 | `stream_analysis_collate.f90` | Aggregates the per-snapshot outputs into time series for plotting. |
 | `compute_cooling_rates.f90` | Computes the net radiative cooling / UV-heating rates in the simulations, for the energy-budget figures. |
+| `Sightlines.f90` | A *forward model*, not a property measurement: ray-traces synthetic quasar absorption sightlines through the simulated stream and hot halo, predicting the ion column densities a telescope would observe. Used to interpret real circumgalactic absorption data in Hafen et al. 2024 (MNRAS 528, 39) — see the "From model to telescope" section of the [project README](../). |
 
 A numerical note: the turbulent velocity dispersion is accumulated as the
 mass-weighted `(v − ⟨v⟩)²` in double precision, rather than the

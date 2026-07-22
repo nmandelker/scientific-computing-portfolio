@@ -154,41 +154,39 @@ tearing it apart.
 
 ![Stream evolution without vs with cooling](figures/cooling_density_evolution.png)
 *The result, visually: gas density in an idealized stream simulation over
-eight sound-crossing times, without radiative cooling (left) and with it
-(right). Without cooling the stream diffuses into a broad, low-density wake;
-with cooling it stays dense and coherent, actually gaining cold mass. From
-Mandelker et al. 2020a, Fig. 2.*
+eight sound-crossing times, without radiative cooling (left) and with fast 
+cooling, `t_cool,mix / t_shear < 1` (right). Without cooling the stream diffuses 
+into a broad, low-density wake; with fast cooling it stays dense and coherent, 
+actually gaining cold mass. From Mandelker et al. 2020a, Fig. 2.* 
 
 ![Cold mass growth via entrainment](figures/cooling_mass_growth.png)
 *The quantitative headline: cold-gas mass versus time. Without cooling
-(dashed) the cold stream mass declines; with cooling (solid) it *grows*, as
-hot gas is entrained and cooled — the turbulent radiative mixing layer (TRML)
-mechanism. From Mandelker et al. 2020a, Fig. 5.*
+(dashed) the cold stream mass declines; with cooling (solid) it *grows* 
+if `t_cool,mix / t_shear < 1`, as hot gas is entrained and cooled through 
+the TRML, and declines when `t_cool,mix / t_shear > 1`, similar to case 
+without any cooling. From Mandelker et al. 2020a, Fig. 5.*
 
 ![Turbulence in the mixing zone](figures/cooling_mixing_turbulence.png)
 *The mixing-layer turbulence that drives entrainment, measured from the
-simulations — one of the many diagnostics computed by the analysis pipeline
-in `cooling_simulations/analysis/`. From Mandelker et al. 2020a, Fig. 8.*
+simulations. This is one of the many diagnostics computed by the analysis 
+pipeline in `cooling_simulations/analysis/`. From Mandelker et al. 2020a, 
+Fig. 8.*
 
 **The vertical slice.** `cooling_simulations/` contains the full pipeline
-behind these results: the RAMSES patch that sets up and runs the simulations
-(with the modified cooling), the Fortran tools that convert raw outputs to a
-compact analysis format, the Fortran analysis codes that measure stream
-properties, and the MATLAB layer for the analytic estimates and final plots.
-See its [README](cooling_simulations/) for the walkthrough.
+behind these results: the RAMSES patch that sets up and runs the simulations, 
+the Fortran tools that convert raw outputs to a compact analysis format, the 
+Fortran analysis codes that measure stream properties, and the MATLAB layer 
+for the analytic estimates and final plots. See its [README](cooling_simulations/) 
+for the walkthrough.
 
 The linear theory of KHI *with* cooling (a much larger parameter space —
 cooling-curve slopes and densities in each medium) was also worked out in
 Mathematica but did not make the paper; it is not included here.
 
-An observational follow-up applied this machinery to interpret real
-absorption sightlines through the circumgalactic medium (Hafen et al. 2024,
-MNRAS 528, 39).
-
 ## The other ingredients, in brief
 
 The self-gravity and magnetic-field ingredients are shown here through their
-key results rather than through code (the magnetic-field row of the panel at
+key results rather than through code (the two corresponding rows in the panel at
 the top of this page is the qualitative summary).
 
 ### Self-gravity
@@ -291,6 +289,16 @@ industry terms this is the full loop — a physics-based model of a hidden
 state, forward-modeled into a predicted observable, then confronted with
 measurements — the same operation as sensor forward-modeling or state
 estimation, in a different domain.
+
+A second observable comes with code to back it. I forward-modeled these same
+cooling simulations into **synthetic quasar absorption sightlines** — ray-tracing
+through the simulated stream and hot halo to predict the ion column densities a
+telescope would measure — which were then compared with real circumgalactic
+absorption data in Hafen et al. 2024 (MNRAS 528, 39). That forward model is
+[`cooling_simulations/analysis/Sightlines.f90`](cooling_simulations/analysis/Sightlines.f90):
+generating synthetic observations from a physical simulation for direct
+comparison with measurements — the same operation as mock-sensor or
+synthetic-data generation, in a different domain.
 
 ![Lyman-alpha luminosity is robust to magnetic fields](figures/lya_dissipation_vs_beta.png)
 *Robustness of the prediction to added physics: the dissipation luminosity
