@@ -49,11 +49,16 @@ answer. Included here is also a forward model of an observable signal
 (Lyman-alpha emission) later applied by independent observational teams, 
 including in *Science*. — ✅ done
 
-### AREPO / moving-mesh projects (Python)
-Analysis pipelines for a different class of simulations, plus
-adaptive-refinement techniques achieving ~100× effective resolution gain for
-~5× cost in targeted regions, developed in collaboration with the code's
-author and since adopted by multiple simulation groups. — 🚧 in preparation
+### [Cosmic web refinement](Cosmic_Web_Refinement/) (AREPO / moving mesh, Python)
+Adaptive-refinement methods for the moving-mesh code AREPO, developed with the
+code's author, that target resolution at the diffuse gas every previous
+simulation left under-resolved: up to ~80× more resolution elements for ~8×
+the compute. The new resolution revealed physics that lower-resolution
+simulations miss entirely. Included here is the Python analysis behind that
+result, including Lagrangian tracking of gas through a mesh with no persistent
+cells, and a validation study in which an interpolation scheme was rejected
+because its artifacts grew under refinement, then replaced and its error
+bounded by an independent check. — ✅
 
 ## Languages and tools
 
