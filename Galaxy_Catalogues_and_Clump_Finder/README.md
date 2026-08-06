@@ -1,25 +1,25 @@
 # Giant Clump Finder & Tracker
 
 **Detection, tracking, and classification of transient structures in ~100 TB
-of adaptive-resolution simulation data — built from scratch in Fortran 90.**
+of adaptive-resolution simulation data, built from scratch in Fortran 90.**
 
-This is the analysis pipeline behind a series of published studies of "giant
-clumps" — dense, star-forming structures that are ubiquitously observed in 
-massive disc galaxies ~10 billion years ago, when the rate of star- and 
-structure-formation in the Universe was at its peak. These clumps form as 
-a result of gravitational instability in rotating discs (Toomre instability), 
+This is the analysis pipeline behind a series of published studies focusing on 
+"giant clumps". These "clumps" are dense, star-forming structures that are 
+ubiquitously observed in massive disc galaxies ~10 billion years ago, when the 
+rate of galaxy-formation in the Universe was at its peak. They form as a result 
+of gravitational instability in rotating discs (Toomre instability), 
 and proceed to evolve subject to the external influence of the galaxy and the internal 
-effects of star-formation and supernova feedback. I wrote this pipeline as a PhD student and postdoc, 
-and it is presented here as-is: research code with commentary,
-not a polished software product. The methodology is described in
+effects of star-formation and supernova feedback. I wrote this pipeline as a PhD 
+student and a postdoc, and it is presented here as I last left it: research code 
+with commentary, not a polished software product. The methodology is described in 
 [Mandelker et al. 2014](https://arxiv.org/abs/1311.0013) (MNRAS 443, 3675) and
 [Mandelker et al. 2017](https://arxiv.org/abs/1512.08791) (MNRAS 464, 635).
 
 ![Detected clumps overlaid on gas and stellar density maps](figures/clump_detection_overview.png)
 *Face-on maps of cold gas (left) and stellar (right) surface density in one
-simulated galaxy at redshift z = 1.5 — about 9 billion years ago. Circles and squares mark
-the clumps detected by this pipeline - circles mark in-situ clumps formed by gravitational 
-instability while squares mark ex-situ clumps that merged as separate galaxies; different 
+simulated galaxy at redshift z = 1.5, about 9 billion years ago. Circles and squares mark
+the clumps detected by this pipeline: circles mark in-situ clumps formed by gravitational 
+instability while squares mark ex-situ clumps that merged as separate galaxies. Different 
 colors denote different clump masses, increasing from grey to red to blue to black, while 
 circle size denotes the clump radius. The dashed circle is the disc boundary found by the 
 disc finder. From Mandelker et al. 2017, Fig. 1.*
@@ -33,7 +33,7 @@ billions of years of cosmic time. The simulations analyzed here are the VELA
 suite: 35 galaxies, each run with three different physics models and with two 
 different output cadences, totaling ~100 TB overall. These use ART, an 
 *adaptive mesh refinement* (AMR) + N-body code to solve the equations of hydrodynamics 
-and gravity in an expanding universe: the computational grid refines itself so that 
+and gravity in an expanding universe. The computational grid refines itself so that 
 dense regions are resolved down to 17–35 parsecs while empty
 regions stay coarse. The stellar and dark-matter components of the galaxies are 
 treated as collisionless particles subject only to gravity, using N-body dynamics. 
@@ -43,35 +43,39 @@ Each simulation produces hundreds of time snapshots.
 *The data in motion: gas surface density in one simulated galaxy (VELA V19,
 face-on, 40 kpc across) over roughly 2 billion years of cosmic time,
 rendered by this pipeline's visualization stage. Narrow streams feed the disc
-from the cosmic web while clumps continuously form, orbit, migrate inward,
-and are disrupted — the transient objects this pipeline detects and tracks.
+from the cosmic web while clumps (dense transient structures) continuously 
+form, orbit, migrate inward, and are disrupted. 
 A [full-resolution 60-second version](figures/VELA_v2_19_gas_face_on.mp4) is
 included in this repository (click "View raw" or download to play).*
 
-The science required answering, for every snapshot of every galaxy:
+The general pipeline, for every snapshot of every galaxy, was as follows:
 
-0. **Defining the system** - what are the dimensions and orientation of the 
+1. **Defining the system** — what are the dimensions and orientation of the 
    galactic disc within which clumps may form? There was no pre-existing catalog 
    of galaxy disc properties, and these had to be identified and defined before 
    we could begin to search for clumps.
-1. **Detection** — which regions of the galaxy's gas and stars are "clumps"?
+2. **Detection** — which regions of the galaxy's gas and stars are "clumps"?
    There is no labeled training data and no crisp definition; a clump is a
    significant overdensity relative to a smooth, rotating disc whose own
-   density varies by orders of magnitude from center to edge.
-2. **Measurement** — for each clump: mass, size, shape, internal motions,
+   density varies by orders of magnitude from center to edge. Clumps can also 
+   be present in one tracer but not another, for example old clumps that have 
+   depleted their gas supply will appear in stellar maps but not in gas maps, 
+   while newly formed star-forming clumps will appear in gas and perhaps in 
+   young stars but not in the overall stellar density.
+3. **Measurement** — for each clump: mass, size, shape, internal motions,
    star-formation rate, age, and ~40 other physical properties.
-3. **Tracking** — is the clump in snapshot N+1 the same object seen in
-   snapshot N? Clumps orbit within the disc, merge, get disrupted, and
-   re-form. Gas flows through them, so a clump cannot be tracked by its gas.
-4. **Classification** — did the clump form in the disc itself (*in-situ*), or
+4. **Tracking** — is the clump in snapshot N+1 the same object seen in
+   snapshot N? Clumps orbit within the disc, get ejected, merge, get disrupted, 
+   and re-form. Gas flows through them, so a clump cannot be tracked by its gas.
+5. **Classification** — did the clump form in the disc itself (*in-situ*), or
    is it the remnant of a smaller galaxy that fell in (*ex-situ*)? The two
    populations look similar but have different physical origins, and
    separating them was a central result of this work.
 
-In modern terms: unsupervised object detection and multi-object tracking in
-3D scientific data, with the detector, tracker, feature extraction, and
-catalog machinery all written from scratch — none of it existed off the shelf
-for this data format and problem.
+In modern terms, this project was equivalent to unsupervised object detection 
+and multi-object tracking in 3D scientific data, with the detector, tracker, 
+feature extraction, and catalog machinery all written from scratch. None of it 
+existed off the shelf for this data format and problem.
 
 ## Pipeline
 
@@ -84,7 +88,7 @@ simulation; outputs of one stage are inputs to the next.
 | 2 | `multi_scale_surface_densities_gen3.f90` | 2,401 | Renders face-on and edge-on projected views of each disc at multiple smoothing scales and using multiple tracers (gas of different phases, stars of different ages, dark matter), for visual inspection and sanity-checking of later stages. |
 | 3 | `clump_finder_combined.f90` | 5,373 | The core: detects clumps in multiple tracers (gas, stars), measures their properties, tracks them across snapshots, classifies in-situ vs ex-situ. Details below. |
 | 4 | `same_clumps.f90`, `collect_clump_data.f90` | 1,258 | Assembles per-snapshot results into cross-time clump catalogs and analysis-ready tables. |
-| — | `thin_timesteps/` | 5,810 | Variants of stages 3–4 adapted for simulations with very finely spaced snapshots, including `proto_clump_positions*.f90`, which traces clump material *backwards* in time to study the disc regions where clumps later form ("proto-clumps"). |
+| — | `thin_timesteps/` | 5,810 | Variants of stages 3–4 adapted for simulations with very finely spaced snapshots, including `proto_clump_positions*.f90`, which traces clump material *backwards* in time from their first appearance, in order to study the disc regions from which the clumps form ("proto-clumps"). |
 
 Downstream statistical analysis and figure production was done in MATLAB
 (a curated selection is in `analysis/`).
@@ -97,14 +101,15 @@ Downstream statistical analysis and figure production was done in MATLAB
    verifies that total mass is conserved by the interpolation.
 2. **Background estimation.** The smooth disc background is estimated by
    convolving the grid with a wide 3D Gaussian. The convolution is done in
-   Fourier space using Intel MKL FFTs — O(N log N) instead of a prohibitively
+   Fourier space using Intel MKL FFTs, so O(N log N) instead of a prohibitively
    expensive direct convolution at these grid sizes.
 3. **Detection.** Cells where the residual overdensity, δρ/ρ, exceeds a
    threshold are flagged, and connected components are extracted with a
-   recursive flood-fill. Components smaller than 8 cells are discarded;
-   catalogs are built at several mass thresholds in parallel so that
-   downstream analyses can test how sensitive results are to the definition
-   of "clump."
+   recursive flood-fill. Components smaller than 8 cells are discarded, 
+   while cells with high overdensity but objectively low density are flagged, 
+   so that spurious clumps are not created in the outer, low-density regions. 
+   In the end, additional thresholds on clump mass and average density are used 
+   to select a robust sample from the full catalog. 
 4. **Measurement.** Each clump gets ~40 properties: baryonic/stellar/gas/dark
    matter masses, size, 3D shape (from the eigenvalue decomposition of the inertia
    tensor), velocity dispersion, rotation, star-formation rate and history,
@@ -126,7 +131,7 @@ Downstream statistical analysis and figure production was done in MATLAB
 ![Grid cells above the detection threshold](figures/detection_residual_cells.png)
 *Steps 1–3 visualized for one snapshot. Top pair: the gas surface density
 with the disc boundary (dashed) and the 14 detected clumps circled (left),
-and the Gaussian-smoothed background estimate the residuals are measured
+and the Gaussian-smoothed background the residuals are measured
 against (right). Bottom: the grid cells whose residual overdensity exceeds
 the detection threshold, from which the connected components are extracted.
 From Mandelker et al. 2014, Figs. 3–4.*
@@ -135,7 +140,7 @@ From Mandelker et al. 2014, Figs. 3–4.*
 *Step 6 visualized: the distribution of dark-matter overdensity at clump
 locations is strongly bimodal, so the in-situ/ex-situ classification
 threshold (dash-dotted line) sits in a natural gap in the data rather than
-being imposed arbitrarily — and the bimodality holds in both feedback
+being imposed arbitrarily. The same bimodality holds in both feedback
 variants of the simulations (blue/red). From Mandelker et al. 2017, Fig. 2.*
 
 ## Key design decisions
@@ -143,44 +148,48 @@ variants of the simulations (blue/red). From Mandelker et al. 2017, Fig. 2.*
 - **Uniform grid + FFT rather than operating on the native adaptive mesh.**
   Resampling costs memory but makes every downstream step (smoothing,
   thresholding, connected components) simple, regular, and fast. The
-  alternative — clump-finding directly on the AMR structure — would have
-  entangled the algorithm with the mesh topology for little scientific gain.
+  alternative, clump-finding directly on the AMR structure, would have
+  entangled the algorithm with complex mesh topology for little scientific gain.
 - **Detection in the residual, not the raw density.** A fixed density
-  threshold cannot work when the disc's own background density spans orders
+  threshold won't work when the disc's background density spans orders
   of magnitude. Detecting δρ/ρ against a locally estimated background makes
   the detector uniform across the disc, across galaxies, and across cosmic
   time. The smoothing scale is set in physical (not comoving) units, tied to
   the expected clump and disc sizes.
-- **Stellar particles as tracers for tracking.** The natural choice — track
-  the gas — fails, because gas has no identity between snapshots and flows
-  through grid cells inside the clumps. Using the IDs of stellar particles 
-  born inside the clump gives a persistent, physically meaningful label. 
+- **Stellar particles as tracers for tracking.** Ideally, we would have wanted 
+  to track clumps using their gas, since observed clumps are typically gas-rich 
+  and star-forming. However, this is not possible in grid-based simulations 
+  because gas has no identity between snapshots and flows freely between grid cells. 
+  Using the IDs of stellar particles born inside the clump gives a persistent, 
+  physically meaningful label. 
 - **Tunable definitions as runtime inputs.** The two most consequential
   parameters (smoothing scale and detection threshold) are command-line
-  inputs, and catalogs are produced at multiple mass cuts — so robustness to
-  definition could be, and was, tested without recompiling.
-- **Memory-bounded design.** Grid size is capped by single-node memory; the
-  region gridded is restricted to a box around the detected disc rather than
-  the full simulation volume.
+  inputs, so robustness to definition could be, and was, tested without 
+  recompiling.
+- **Memory-bounded design.** Grid size is capped by single-node memory, so 
+  the region searched for clumps is restricted to a box around the detected 
+  disc rather than the full simulation volume.
 
 Each snapshot is processed independently, so the pipeline parallelizes
 trivially across snapshots and across simulations as separate cluster 
-jobs — within a snapshot the code is serial. The full list of snapshots 
+jobs, but within a snapshot the code is serial. The full list of snapshots 
 and galaxies desired for analysis was split onto different nodes at runtime 
 using a bash script.
 
 ## Validation
 
-- **Conservation checks** are built into the resampling step (total mass on
-  the grid vs. total mass in the input data).
-- **Visual inspection**: the projected disc images from stage 2 were compared
-  against detected clump positions systematically. Additional disc images were 
+- **Conservation checks** are built into the resampling step (total mass, 
+  momentum, and energy on the grid vs. in the input data).
+- **Visual inspection** of the projected disc images from stage 2 was performed, 
+  to validate detected clump positions systematically. Additional disc images were 
   prepared that included information about clumps detected in each snapshot, such 
-  as their position, mass, density, and whether they were detected in gas or stars, 
-  so that these could be easily overlaid and validated by-eye.
-- **Sensitivity analysis**: results were tested against variations of the
-  smoothing scale, detection threshold, and minimum clump mass (multiple
-  parallel catalogs; see Mandelker et al. 2014, §2, and Mandelker et al. 2017, §A).
+  as their position, mass, density, in situ vs ex situ origin, and whether they 
+  were detected in gas or stars, so that these could be easily overlaid and validated 
+  by-eye.
+- **Sensitivity analysis**: the clump finder itself was extensively tested against 
+  variations of the smoothing scale and detection threshold, while clump population 
+  statistics were tested against thresholds in minimum clump mass and density (see 
+  Mandelker et al. 2014, §2, and Mandelker et al. 2017, §A).
 
   ![Clump mass functions under different finder parameters](figures/mass_function_sensitivity.png)
   *The clump mass function recovered under different combinations of the
@@ -188,44 +197,48 @@ using a bash script.
   robust to changes in these parameters, as is the slope of the low-mass 
   end, though more lenient definitions of "clump" increase the number of 
   low-mass diffuse clumps. From Mandelker et al. 2017, Fig. A2.*
-- **Resolution and physics-model robustness**: key statistics (e.g., clump
-  mass functions) were compared across simulation generations with different
-  resolutions and feedback physics (Mandelker et al. 2017; Ceverino, Mandelker, et al. 2023).
-- **Comparison with observations**: clump properties and abundances were
-  compared against published observational samples in the papers above, and those listed below.
+  
 
 ## Results and impact
+
+The measured clump properties and abundances were compared against published
+observational samples in the papers below. Those comparisons test the
+simulations and their input physics rather than the pipeline itself, since the
+different simulation generations carry genuinely different clump populations
+and cannot all match the same data.
 
 The pipeline produced the clump catalogs behind:
 
 - [Mandelker et al. 2014, MNRAS 443, 3675](https://arxiv.org/abs/1311.0013) —
-  methodology; the census of in-situ vs ex-situ clumps; clump migration and
-  survival.
+  introduced the methodology, examined the census of in-situ vs ex-situ clumps 
+  and devised observational criteria to distinguish them, discussed clump migration 
+  and survival and the observational implications of this. Simulation results were 
+  compared against HST observations to test the reliability of the simulations themselves. 
 - [Mandelker et al. 2017, MNRAS 464, 635](https://arxiv.org/abs/1512.08791) —
-  clump properties, evolution, and their dependence on stellar feedback
-  physics.
+  focused on clump properties, evolution, and survival, and their dependence on stellar 
+  feedback physics. I compared simulation results with different feedback perscriptions 
+  against analytic insight and against HST clump observations. 
 - [Ceverino, Mandelker et al. 2023, MNRAS 522, 3912](https://arxiv.org/abs/2210.15372) — 
-  clump analysis in a newer simulation generation, with more aggressive stellar feedback.
+  performed clump analysis in a newer simulation generation, with more aggressive stellar feedback.
 - [Dekel, Mandelker, Bournaud et al. 2022, MNRAS 511, 316](https://arxiv.org/abs/2107.13561) — 
-  an analytic model of clump evolution, validated against the thin-timestep tracking from this pipeline 
+  presented an analytic model of clump evolution, validated against the thin-timestep tracking from this pipeline 
   and compared to observed properties of clumps from HST (see the clump-evolution project in this repository). 
 - [Huertas-Company, Guo, Ginzburg, Lee, Mandelker et al. 2020, MNRAS 499, 814](https://arxiv.org/abs/2006.14636) — 
-  estimating clump masses in observations using ML models and neural networks trained on simulations using my clump catalog.
+  focused on estimating clump masses in observations using ML models and neural networks trained on simulations using my clump catalog.
 - [Ginzburg, Huertas-Company, Dekel, Mandelker et al. 2021, MNRAS 501, 730](https://arxiv.org/abs/2011.06616) — 
-  estimating the origin (in-situ or ex-situ) and longevity (long-lived or rapidly disrupted) of clumps in HST observations 
-  using an encoder-decoder convolutional neural network trained on simulations using my clump catalog.
+  presented a pipeline for estimating the origin (in-situ or ex-situ) and longevity (long-lived or rapidly disrupted) of clumps in HST observations using an encoder-decoder convolutional neural network trained on simulations using my clump catalog.
 - [Inoue, Dekel, Mandelker et al. 2016, MNRAS 456, 2052](https://arxiv.org/abs/1510.07695) — 
-  the discovery that clumps form in regions classical stability theory says 
+  showcased the discovery that clumps form in regions classical stability theory says 
   should be stable (Toomre Q > 1), motivating the turbulence-decomposition project in this repository.
 - [Mandelker et al. 2025, MNRAS Letters 538, L9](https://arxiv.org/abs/2406.07633) — 
-  an analysis of turbulence in clumpy discs, and specifically in protoclump regions, showing that 
+  provided a detailed analysis of turbulence in clumpy discs, and specifically in protoclump regions, showing that 
   clumps preferentially form in regions where the compressive-to-solenoidal ratio of turbulence is 
-  anomalously high, thus allowing their formation even when Toomre Q>1.
+  anomalously high, thus allowing their formation even when Toomre Q>1 (see the turbulence decomposition project in this repository)..
 - [Ginzburg, Dekel, Mandelker et al. 2025, A&A 698, A110](https://arxiv.org/abs/2501.07097) — 
-  an analysis of the origin of compressive turbulence in protoclump regions in the simulations.
+  presented an analysis of the origin of compressive turbulence in protoclump regions in the simulations.
 
-The results of this analysis have also formed the basis of theoretical interpretation of several 
-observational studies using HST and JWST (e.g. [Guo et al. 2015, ApJ 800, 39](https://arxiv.org/abs/1410.7398);
+The results of this analysis have also formed the basis for theoretical interpretation of several 
+observational studies using HST and JWST data (e.g. [Guo et al. 2015, ApJ 800, 39](https://arxiv.org/abs/1410.7398);
 [Guo et al. 2018, ApJ 853, 108](https://arxiv.org/abs/1712.01858); 
 [Martin et al. 2023, ApJ 955, 106](https://arxiv.org/abs/2308.00041)), 
 and I am and have been a member of several such collaborations. 
@@ -236,43 +249,44 @@ outputs (for the clump-evolution and turbulence projects in this repository)
 and, most recently, to HDF5 outputs from the moving-mesh code AREPO.
 
 ![Clump lifetime distributions under different feedback physics](figures/clump_lifetimes_feedback.png)
-*A science payoff of the tracking: distributions of clump lifetime (in units
-of the internal free-fall time) in simulations without (blue) and with (red)
-radiation-pressure feedback. The distribution is bimodal — some clumps are
-disrupted within a free-fall time while others survive many — and the balance
-between the two populations depends on the feedback physics. From Mandelker
-et al. 2017, Fig. 7.*
+*Distributions of clump lifetime (in units of the internal free-fall time) 
+in simulations without (blue) and with (red) radiation-pressure feedback. 
+The distribution is bimodal. Some clumps are disrupted within a free-fall 
+time while others survive many, and the balance between the two populations 
+depends on the feedback physics. This result was made possible by the clump 
+tracking. From Mandelker et al. 2017, Fig. 7.*
 
 ![U-Net clump detection in a mock HST image](figures/unet_detection_mock_hst.png)
-*The catalog as ML training data: a U-Net trained on mock HST observations of
-the simulations, labeled with this pipeline's 3D clump catalog. Left: the
-mock image with detected clumps boxed. Center: the "ground truth" labels
+*The catalog as ML training data: a U-Net trained on mock HST observations 
+generated from the simulations, labeled with this pipeline's 3D clump catalog. 
+Left: the mock image with detected clumps boxed. Center: the "ground truth" labels
 derived from the catalog. Right: the network's output. From Ginzburg et al.
 2021, Fig. 5.*
 
 ![ROC and precision-recall curves for the neural-network detector](figures/unet_roc_pr_curves.png)
 *Detection performance (ROC and precision–recall curves) of that
-neural-network detector — evaluated, again, against this pipeline's catalog
+neural-network detector, again evaluated against this pipeline's catalog
 as ground truth. From Ginzburg et al. 2021, Fig. 10.*
 
 ## What I'd do differently today
 
-This code is honest about its vintage (the files date to 2019 and earlier,
+This code is honest about its vintage (the files date from 2016-2019,
 and the style reflects a physicist writing for himself). With today's
 hindsight and tooling:
 
-- **Version control from the start.** This repository is a snapshot of final
-  working versions; the development history lives only in filenames like
-  `_gen3` and `_v4`.
-- **A self-describing data format** (HDF5) instead of raw Fortran binaries
-  with layouts that must match exactly between writer and reader. The original 
-  version required specific raw Fortran binary file outputs created by the 
-  ART simulation code. For the clump evolution and turbulence decomposition 
-  projects, the clump finder was adapted to work with different simulation outputs 
-  (RAMSES code, also AMR) and more recently it has been adapted to work with HDF5 
-  file outputs from AREPO moving-mesh simulations, though these results have not 
-  yet been published.
-- **Configuration files** instead of compile-time parameters — most settings
+- **Version control from the start.** This repository is a snapshot of the
+  final working version of each program. Everything that was tried and
+  discarded along the way is simply gone, and so is any record of why.
+- **A reader interface, so the pipeline stops caring what wrote the data.**
+  The code reads ART's raw Fortran binaries directly, with array layouts that
+  have to match exactly between writer and reader. That format was not my
+  choice, it was what the simulation produced, but the coupling was: the file
+  parsing is interleaved with the analysis rather than sitting behind a
+  boundary. I have since ported the finder by hand to RAMSES outputs (for the
+  clump-evolution and turbulence projects in this repository) and more recently
+  to AREPO's HDF5 outputs, unpublished so far. Three ports that a single reader
+  abstraction would have reduced to three small files.
+- **Configuration files** instead of compile-time parameters, since most settings
   in `module parameters` require recompiling to change.
 - **Python for everything that isn't performance-critical.** Today I'd keep
   compiled code only for the hot loops (gridding, FFTs, flood-fill) and do
@@ -280,10 +294,6 @@ hindsight and tooling:
 - **Synthetic-data tests.** Injecting artificial clumps of known properties
   and verifying recovery would have made the validation quantitative and
   automatic rather than manual. 
-- The header of `clump_finder_combined.f90` still carries my own to-do list
-  from the time — including replacing a cell-by-cell particle search with a
-  linked list — a small time capsule of the next optimizations I never needed
-  to make.
 
 ## Contents
 
