@@ -1,0 +1,5 @@
+torch
+numpy
+matplotlib
+transformers
+accelerate

@@ -1,0 +1,130 @@
+{
+  "p1_question_chat": [
+    {
+      "token": ".",
+      "repr": "'.'",
+      "token_id": 13,
+      "prob": 0.8128314018249512
+    },
+    {
+      "token": ",",
+      "repr": "','",
+      "token_id": 11,
+      "prob": 0.1412489116191864
+    },
+    {
+      "token": ".\n\n",
+      "repr": "'.\\n\\n'",
+      "token_id": 382,
+      "prob": 0.01686977781355381
+    },
+    {
+      "token": " with",
+      "repr": "' with'",
+      "token_id": 448,
+      "prob": 0.01686977781355381
+    },
+    {
+      "token": " in",
+      "repr": "' in'",
+      "token_id": 304,
+      "prob": 0.006206043995916843
+    }
+  ],
+  "p2_rephrase_chat": [
+    {
+      "token": ",",
+      "repr": "','",
+      "token_id": 11,
+      "prob": 0.5622925758361816
+    },
+    {
+      "token": " with",
+      "repr": "' with'",
+      "token_id": 448,
+      "prob": 0.206855908036232
+    },
+    {
+      "token": ".",
+      "repr": "'.'",
+      "token_id": 13,
+      "prob": 0.206855908036232
+    },
+    {
+      "token": ".\n\n",
+      "repr": "'.\\n\\n'",
+      "token_id": 382,
+      "prob": 0.013223854824900627
+    },
+    {
+      "token": " in",
+      "repr": "' in'",
+      "token_id": 304,
+      "prob": 0.006246506702154875
+    }
+  ],
+  "p3_completion_chat": [
+    {
+      "token": ".",
+      "repr": "'.'",
+      "token_id": 13,
+      "prob": 0.4086725413799286
+    },
+    {
+      "token": " in",
+      "repr": "' in'",
+      "token_id": 304,
+      "prob": 0.4086725413799286
+    },
+    {
+      "token": ",",
+      "repr": "','",
+      "token_id": 11,
+      "prob": 0.17036005854606628
+    },
+    {
+      "token": ".\n\n",
+      "repr": "'.\\n\\n'",
+      "token_id": 382,
+      "prob": 0.009611057117581367
+    },
+    {
+      "token": ".\n",
+      "repr": "'.\\n'",
+      "token_id": 624,
+      "prob": 0.0013007151428610086
+    }
+  ],
+  "p3_completion_raw": [
+    {
+      "token": ",",
+      "repr": "','",
+      "token_id": 11,
+      "prob": 0.4792400300502777
+    },
+    {
+      "token": ".",
+      "repr": "'.'",
+      "token_id": 13,
+      "prob": 0.37323251366615295
+    },
+    {
+      "token": " and",
+      "repr": "' and'",
+      "token_id": 323,
+      "prob": 0.044576264917850494
+    },
+    {
+      "token": " but",
+      "repr": "' but'",
+      "token_id": 714,
+      "prob": 0.014471795409917831
+    },
+    {
+      "token": ".\n",
+      "repr": "'.\\n'",
+      "token_id": 624,
+      "prob": 0.01277131401002407
+    }
+  ]
+}
