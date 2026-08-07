@@ -62,17 +62,16 @@ study where an interpolation scheme was rejected because it failed validation te
 in a way that became worse as resolution increased. This scheme was then replaced and 
 the alternative scheme's error was bounded by an independent check. 
 
-### [LLM confidence probing](LLM_Confidence_Probing/)
+### [LLM confidence probing](https://github.com/nmandelker/llm-confidence-probing)
 
-This is not from my academic career, and not a contribution to the literature. This 
-is the result of a few days spent reading up on transformers and working through the 
-PyTorch tutorials, then attempting something real with what I had learned. Four experiments 
-on a small open-weights model, asking where inside the network a rephrased question
-changes the answer. I included this because it shows how my research methodology transferred 
-to a domain I had started learning that week. I applied the same habits as the projects above, 
-isolated the confounding variables, distrusted the encouraging first result, and reported the weaker 
-one. I wrote the code with the help of an AI coding assistant, but all of the analysis and 
-interpretation are entirely my own. This is the only project here that anyone can run from start to finish.
+Not from my academic career, and not a contribution to the literature: a few days spent
+reading up on transformers and working through the PyTorch tutorials, then attempting
+something real with what I had learned. Four experiments on a small open-weights model,
+asking where inside the network a rephrased question changes the answer. I included it
+because it shows the same habits as the projects above, isolating confounding variables,
+distrusting the encouraging first result, reporting the weaker one, applied to a domain
+I had started learning that week. Kept as a separate, Python-only repository, and it is
+the only project here that anyone can run from start to finish.
 
 ## Languages and tools
 
