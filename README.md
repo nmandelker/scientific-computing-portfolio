@@ -9,7 +9,7 @@ tools for terabyte-scale scientific data. My work has led to over 60 peer-review
 publications with over 6000 citations and an h-index of 36. This repository 
 is a curated showcase of the code behind that career. 
 
-**What this is:** In this repo, I present my code from my various research 
+In this repo, I present my code from my various research 
 projects, as I wrote it at the time. These tools were written to answer scientific 
 questions under deadline, by a physicist, for himself and his collaborators, 
 not as software products. What they demonstrate is algorithm design from scratch, 

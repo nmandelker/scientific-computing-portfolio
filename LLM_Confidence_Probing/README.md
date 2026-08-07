@@ -5,7 +5,7 @@ four experiments on Qwen2.5-1.5B-Instruct asking whether and how rephrasing
 a question changes what the model appears to believe, and where in the network 
 that change happens.**
 
-**Scope:** This is not research from my academic career, and it is not a 
+This is not research from my academic career, and it is not a 
 contribution to the literature. It is the result of a few days' work reading up 
 on transformer architecture, working through the PyTorch tutorials, and then 
 attempting something real with what I had learned. Nothing here is a new result, 
