@@ -3,7 +3,7 @@
 I'm a computational astrophysicist (PhD, Hebrew University; postdoctoral
 fellowships at Yale, the Heidelberg Institute for Theoretical Studies, 
 and KITP/UC Santa Barbara; Assistant Professor at the Hebrew University 
-of Jerusalem, Visiting Scholar at UW Seattle) with 14 years of experience 
+of Jerusalem, Visiting Scholar at UW Seattle) with 15 years of experience 
 building analytical and numerical models, simulation pipelines, and analysis 
 tools for terabyte-scale scientific data. My work has led to over 60 peer-reviewed 
 publications with over 6000 citations and an h-index of 36. This repository 
